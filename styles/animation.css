@@ -1,0 +1,24 @@
+@keyframes colorChange {
+  0% {
+    color: #ff4500;
+  }
+  25% {
+    color: #ff8c00;
+  }
+  50% {
+    color: #ffd700;
+  }
+  75% {
+    color: #32cd32;
+  }
+  100% {
+    color: #1e90ff;
+  }
+}
+
+.animated-text span {
+  font-size: 2rem;
+  display: inline-block;
+  animation: colorChange 3s;
+  animation-timing-function: ease-in-out;
+}
