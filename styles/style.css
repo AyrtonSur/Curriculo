@@ -41,7 +41,7 @@ ul {
   gap: 2vmax;
 }
 
-.section1, .section2, .section3, .section4 {
+.section1, .section2, .section3, .section4, .section5 {
   min-height: calc(100vh + .625rem);
 }
 
@@ -84,12 +84,39 @@ h4 {
   justify-content: space-around;
 }
 
+@keyframes borderColorChange {
+  0% {
+    border-color: #ff6347; /* Tomate */
+  }
+  20% {
+    border-color: #ffa500; /* Laranja */
+  }
+  40% {
+    border-color: #ffff00; /* Amarelo */
+  }
+  60% {
+    border-color: #00ff00; /* Verde limão */
+  }
+  80% {
+    border-color: #00ced1; /* Turquesa escuro */
+  }
+  100% {
+    border-color: #ff69b4; /* Rosa choque */
+  }
+}
+
+
 .myphoto {
   max-width: 50%;
   max-height: 20%;
   object-fit: cover;
   border-radius: 50%;
   min-width: 10rem;
+  border: 1px solid;
+  border-color: var(--modal);
+  animation: borderColorChange 5s infinite;
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate;
 }
 
 .presentation {
@@ -144,11 +171,85 @@ h4 {
   min-width: 2rem;
 }
 
-.langsIcon:hover {
-
-}
 
 .section3 {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh + .625rem);
+}
+
+.abilities {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: space-around;
+  height: 100%;
+  width: 100%;
+}
+
+.curAbility {
+  background-color: var(--modal);
+  border-radius: 10%;
+}
+
+.divAbilities {
+  display: flex;
+  gap: 2rem;
+}
+
+.divAbilities button {
+  position: relative;
+}
+
+.divAbilities button:hover {
+  cursor: pointer;
+}
+
+.abilityName {
+  position: absolute;
+  bottom: 80%; /* Coloca o texto acima do ícone */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  white-space: nowrap; /* Evita quebra de linha no texto */
+}
+
+.abilityName::after {
+  content: '';
+  position: absolute;
+  top: 100%; /* Posiciona a seta abaixo do texto */
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.7) transparent transparent transparent;
+}
+
+.divAbilities button:hover span {
+  opacity: 1;
+}
+
+.abilitiesIcon {
+  width: 100%;
+  height: 70%;
+  object-fit: contain;
+  min-width: 2rem;
+}
+
+.abilityText {
+  font-size: 1.25rem;
+  width: 80%;
+  text-align: center;
+}
+
+.section4 {
   display: flex;
   flex-flow: column wrap;
   justify-content: center;
@@ -168,6 +269,7 @@ h4 {
   align-content: center;
   gap: 2rem;
   height: 8rem;
+  padding-bottom: 0.3rem;
 }
 
 .footerDiv label {
