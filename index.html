@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./styles/Normalize.css">
   <link rel="stylesheet" href="./styles/style.css">
+  <link rel="stylesheet" href="./styles/animation.css">
   <link rel="shortcut icon" href="./assets/portfolio.png" type="image/x-icon">
   <title>Curriculo</title>
 </head>
@@ -19,10 +20,13 @@
           <a href="#section2">Sobre Mim</a>
         </li>
         <li>
-          <a href="#section3">Projetos</a>
+          <a href="#section3">Habilidades</a>
         </li>
         <li>
-          <a href="#section4">Experiência e Educação</a>
+          <a href="#section4">Projetos</a>
+        </li>
+        <li>
+          <a href="#section5">Experiência e Educação</a>
         </li>
 
       </ul>
@@ -39,7 +43,7 @@
         <p>Desenvolvedor Back-End</p>
       </div>
       <div class="presentation">
-        <h2>Olá, meu nome é Ayrton!</h2>
+        <h2 class="animated-text">Olá, meu nome é Ayrton!</h2>
         <h4>Atualmente tenho 20 anos e sou estudante de Ciência da Computação na Universidade Federal Fluminense (UFF).</h4>
       </div>
     </section>
@@ -94,11 +98,63 @@
       </div>
     </section>
     <section id="section3" class="section3">
+      <div class="abilities">
+        <h1>Habilidades:</h1>
+        <p class="abilityText" id="abilityText">Tenho conhecimento básico de Python e experiência com algumas bibliotecas, como Numpy e Pygame.</p>
+        <div class="divAbilities">
+          <button id="Python">
+            <img class="abilitiesIcon curAbility" src="./assets/Python.png"></img>
+            <span class="abilityName">Python</span>
+          </button>
+          <button id="Java">
+            <img class="abilitiesIcon" src="./assets/Java.png"></img>
+            <span class="abilityName">Java</span>
+          </button>
+          <button id="TypeScript">
+            <img class="abilitiesIcon" src="./assets/TypeScript.png"></img>
+            <span class="abilityName">TypeScript</span>
+          </button>
+          <button id="JavaScript">
+            <img class="abilitiesIcon" src="./assets/JavaScript.png"></img>
+            <span class="abilityName">JavaScript</span>
+          </button>
+          <button id="C">
+            <img class="abilitiesIcon" src="./assets/C.png"></img>
+            <span class="abilityName">C</span>
+          </button>
+          <button id="Rust">
+            <img class="abilitiesIcon" src="./assets/Rust.png"></img>
+            <span class="abilityName">Rust</span>
+          </button>
+          <button id="NodeJs">
+            <img class="abilitiesIcon" src="./assets/NodeJs.png"></img>
+            <span class="abilityName">Node.Js</span>
+          </button>
+          <button id="React">
+            <img class="abilitiesIcon" src="./assets/React.png"></img>
+            <span class="abilityName">React</span>
+          </button>
+          <button id="DataBase">
+            <img class="abilitiesIcon" src="./assets/DataBase.png"></img>
+            <span class="abilityName">DataBase</span>
+          </button>
+          <button id="HTML">
+            <img class="abilitiesIcon" src="./assets/HTML.png"></img>
+            <span class="abilityName">HTML</span>
+          </button>
+          <button id="CSS">
+            <img class="abilitiesIcon" src="./assets/Css.png"></img>
+            <span class="abilityName">CSS</span>
+          </button>
+        </div>
+      </div>
+    </section>
+    <section id="section4" class="section4">
       <div class="projetos">
         <h2>Projetos que fiz até agora:</h2>
       </div>
     </section>
-    <section id="section4" class="section4">
+    <section id="section5" class="section5">
       <div></div>
     </section>
   </main>
@@ -118,6 +174,6 @@
       </nav>
     </div>
   </footer>
-  
+  <script src="./scripts/script.js"></script>
 </body>
 </html>
