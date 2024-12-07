@@ -145,6 +145,7 @@ h4 {
   display: flex;
   flex-flow: column wrap;
   gap: 1rem;
+  max-width: 80%;
 }
 
 .aboutme p {
