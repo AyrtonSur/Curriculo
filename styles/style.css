@@ -293,7 +293,7 @@ h4 {
 
 .footerDiv nav {
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: row nowrap;
   align-items: flex-end;
   justify-content: center;
   height: 100%;
