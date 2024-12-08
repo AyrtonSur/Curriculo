@@ -106,3 +106,45 @@ document.addEventListener('DOMContentLoaded', () => {
     navMenu.classList.toggle('show')
   })
 })
+
+document.addEventListener('DOMContentLoaded', () => {
+  const animatedElementLeft = document.querySelector('.animated-element-right')
+  const animatedElementRight = document.querySelector('.animated-element-left')
+  const div = document.querySelector('.aboutme')
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animatedElementLeft.classList.add('enter')
+        animatedElementLeft.classList.remove('exitRight')
+        animatedElementRight.classList.add('enter')
+        animatedElementRight.classList.remove('exitLeft')
+      } else {
+        animatedElementLeft.classList.add('exitRight')
+        animatedElementLeft.classList.remove('enter')
+        animatedElementRight.classList.add('exitLeft')
+        animatedElementRight.classList.remove('enter')
+      }
+    })
+  })
+
+  observer.observe(div);
+})
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const divAboutme = document.querySelector('.aboutme')
+  const div = document.querySelector('.tecnologies')
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        div.classList.add('show')
+        div.classList.remove('hidden')
+      } else {
+        div.classList.add('hidden')
+        div.classList.remove('show')
+      }
+    })
+  })
+
+  observer.observe(div);
+})
