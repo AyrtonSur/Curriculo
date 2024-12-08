@@ -30,8 +30,16 @@ header {
   display: flex;
   justify-content: space-around;
   position: fixed;
+  z-index: 10;
   width: 100%;
   height: 10%;
+}
+
+.divHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
 }
 
 nav {
@@ -265,13 +273,65 @@ h4 {
   display: flex;
   flex-flow: column wrap;
   justify-content: center;
+  height: calc(100vh + .625rem);
 }
 
 .projetos {
+  position: relative;
+  height: 100%;
   display: flex;
   flex-flow: column wrap;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
+}
+
+.carousel {
+  position: relative;
+  height: 60%;
+  width: 80%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.imageCarousel {
+  width: 100%;
+  object-fit: cover;
+}
+
+.carouselTrackContainer {
+  background: lightgreen;
+  height: 100%;
+  width: 80%;
+  position: relative;
+}
+
+.carouselTrack {
+  list-style: none;
+}
+
+.carouselSlide {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.carouselButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 8rem;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.carouselButtonLeft {
+  left: -40px;
+}
+
+.carouselButtonRight {
+  right: -40px;
 }
 
 .footerDiv {
@@ -334,12 +394,6 @@ h4 {
   cursor: pointer;
 }
 
-.divHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-}
 
 
 @media screen and (max-width: 720px){
