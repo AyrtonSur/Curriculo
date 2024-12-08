@@ -42,9 +42,14 @@
   transform: translateX(-1500px);
 }
 
+.showWithDelay {
+  opacity: 1;
+  transition: opacity 3s ease 3s;
+}
+
 .show {
   opacity: 1;
-  transition: opacity 5s ease;
+  transition: opacity 3s ease;
 }
 
 .hidden {
