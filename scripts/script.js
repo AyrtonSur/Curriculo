@@ -165,23 +165,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
   observer.observe(div);
 })
-
-document.addEventListener("DOMContentLoaded", () => {
-  const slidesContainer = document.querySelector(".slides");
-  const slides = document.querySelectorAll(".slide");
-  const nextButton = document.getElementById("next-button");
-  const totalSlides = slides.length;
-
-  let currentIndex = 0;
-
-  nextButton.addEventListener("click", () => {
-    // Avançar para o próximo slide
-    currentIndex = (currentIndex + 1) % totalSlides;
-
-    // Calcular a nova posição de deslocamento
-    const offset = -currentIndex * 300; // 300 é a largura de cada slide
-
-    // Aplicar a transição
-    slidesContainer.style.transform = `translateX(${offset}px)`;
-  });
-});
