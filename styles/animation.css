@@ -22,3 +22,31 @@
   animation: colorChange 3s;
   animation-timing-function: ease-in-out;
 }
+
+
+.enter {
+  transform: translateX(0);
+  transition: transform 3s ease;
+}
+
+.exitRight {
+  transform: translateX(1500px);
+}
+
+.enter {
+  transform: translateX(0);
+  transition: transform 3s ease;
+}
+
+.exitLeft {
+  transform: translateX(-1500px);
+}
+
+.show {
+  opacity: 1;
+  transition: opacity 5s ease;
+}
+
+.hidden {
+  opacity: 0;
+}
