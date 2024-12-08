@@ -132,6 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 document.addEventListener('DOMContentLoaded', () => {
+  const divObserved = document.querySelector('.aboutme')
   const div = document.querySelector('.tecnologies')
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -145,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   })
 
-  observer.observe(div);
+  observer.observe(divObserved);
 })
 
 document.addEventListener('DOMContentLoaded', () => {
