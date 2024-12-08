@@ -1,7 +1,6 @@
 const track = document.querySelector('.carouselTrack')
 const slides = Array.from(track.children)
 const nextButton = document.querySelector('.carouselButtonRight')
-console.log(nextButton)
 const previousButton = document.querySelector('.carouselButtonLeft')
 
 const slideWidth = slides[0].getBoundingClientRect().width
