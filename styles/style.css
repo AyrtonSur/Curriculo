@@ -22,6 +22,10 @@
   background-color: var(--background);
 }
 
+body {
+  overflow-x: hidden;
+}
+
 header {
   display: flex;
   justify-content: space-around;
