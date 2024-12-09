@@ -198,6 +198,7 @@ h4 {
   flex-flow: row wrap;
   width: 90%;
   justify-content: center;
+  overflow: hidden;
 }
 
 .langsIcon {
@@ -236,10 +237,12 @@ h4 {
   width: 95%;
   justify-content: center;
   gap: 2rem;
+  overflow: visible;
 }
 
 .divAbilities button {
   position: relative;
+  overflow: visible;
 }
 
 .divAbilities button:hover {
@@ -258,6 +261,7 @@ h4 {
   opacity: 0;
   transition: opacity 0.3s ease;
   white-space: nowrap; /* Evita quebra de linha no texto */
+  overflow: visible;
 }
 
 .abilityName::after {
