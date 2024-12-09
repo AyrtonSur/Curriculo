@@ -26,7 +26,7 @@
 
 .enter {
   transform: translateX(0);
-  transition: transform 3s ease;
+  transition: transform 1.5s ease;
 }
 
 .exitRight {
@@ -35,7 +35,7 @@
 
 .enter {
   transform: translateX(0);
-  transition: transform 3s ease;
+  transition: transform 1.5s ease;
 }
 
 .exitLeft {
@@ -44,7 +44,7 @@
 
 .showWithDelay {
   opacity: 1;
-  transition: opacity 3s ease 3s;
+  transition: opacity 3s ease 1.5s;
 }
 
 .show {
