@@ -20,7 +20,7 @@
   font-weight: 600;
   list-style: none;
   background-color: var(--background);
-  overflow-x: hidden;
+
 }
 
 body {
@@ -73,6 +73,7 @@ nav {
 
 .section1, .section2, .section3, .section4, .section5 {
   min-height: calc(100vh + .625rem);
+  overflow-x: hidden;
 }
 
 h1 {
