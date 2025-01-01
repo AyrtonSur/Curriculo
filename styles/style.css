@@ -308,7 +308,7 @@ h4 {
   flex-flow: column wrap;
   justify-content: space-around;
   align-items: center;
-  overflow-x: visible;
+  overflow-x: hidden;
 }
 
 .carousel {
@@ -377,6 +377,7 @@ h4 {
   background: transparent;
   border: 0;
   cursor: pointer;
+  z-index: 1;
 }
 
 .carouselButtonLeft {
