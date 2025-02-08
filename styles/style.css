@@ -551,6 +551,11 @@ h4 {
     font-size: 4rem;
   }
 
+  .myphoto {
+    border-radius: 32px;
+    max-width: 75%;
+  }
+
   .hamburger {
     display: block;
     position: relative;
