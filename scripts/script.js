@@ -103,6 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const navMenu = document.getElementById('nav-menu')
 
   hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active')
     navMenu.classList.toggle('show')
   })
 })
