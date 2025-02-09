@@ -667,7 +667,7 @@ h4 {
   }
 }
 
-@media screen and (max-height: 600px) and (min-width: 600px){
+@media screen and (max-height: 600px) and (min-width: 300px){
   .carouselDiv {
     height: 110vh;
   }
