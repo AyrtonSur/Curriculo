@@ -1874,3 +1874,66 @@ html {
     opacity: .5;
   }
 }
+
+/* Swiper Custom Styles */
+.projects-swiper .swiper-button-next,
+.projects-swiper .swiper-button-prev {
+  color: #fff !important;
+  background: rgb(37, 99, 235) !important;
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 50% !important;
+  transition: all 0.3s ease !important;
+}
+
+.projects-swiper .swiper-button-next:hover,
+.projects-swiper .swiper-button-prev:hover {
+  background: rgb(29, 78, 216) !important;
+  transform: scale(1.1) !important;
+}
+
+.projects-swiper .swiper-button-next::after,
+.projects-swiper .swiper-button-prev::after {
+  font-size: 18px !important;
+  font-weight: bold !important;
+}
+
+.projects-swiper .swiper-pagination-bullet {
+  background: rgb(148, 163, 184);
+  opacity: 1;
+  width: 10px;
+  height: 10px;
+  transition: all 0.3s ease;
+}
+
+.dark .projects-swiper .swiper-pagination-bullet {
+  background: rgb(71, 85, 105);
+}
+
+.projects-swiper .swiper-pagination-bullet-active {
+  background: rgb(59, 130, 246);
+  width: 32px;
+  border-radius: 5px;
+}
+
+.dark .projects-swiper .swiper-pagination-bullet-active {
+  background: rgb(59, 130, 246);
+}
+
+.projects-swiper .swiper-pagination-bullet:hover {
+  background: rgb(96, 165, 250);
+}
+
+.dark .projects-swiper .swiper-pagination-bullet:hover {
+  background: rgb(96, 165, 250);
+}
+
+/* Force equal height for all swiper slides */
+.projects-swiper .swiper-wrapper {
+  align-items: stretch;
+}
+
+.projects-swiper .swiper-slide {
+  height: auto;
+  display: flex;
+}

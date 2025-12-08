@@ -1,33 +1,16 @@
 import { ExternalLink, Github, ChevronLeft, ChevronRight } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { useLanguage } from '../contexts/LanguageContext';
-import { useState, useEffect } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination, Autoplay } from 'swiper/modules';
+import { useRef } from 'react';
+import type { Swiper as SwiperType } from 'swiper';
+import 'swiper/css';
+import 'swiper/css/pagination';
 
 export function Projects() {
   const { t } = useLanguage();
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [slidesToShow, setSlidesToShow] = useState(3);
-  const [touchStart, setTouchStart] = useState(0);
-  const [touchEnd, setTouchEnd] = useState(0);
-
-  // Minimum swipe distance (in pixels)
-  const minSwipeDistance = 50;
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 640) {
-        setSlidesToShow(1);
-      } else if (window.innerWidth < 1024) {
-        setSlidesToShow(2);
-      } else {
-        setSlidesToShow(3);
-      }
-    };
-
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  const swiperRef = useRef<SwiperType | null>(null);
 
   const projects = [
     {
@@ -80,44 +63,6 @@ export function Projects() {
     }
   ];
 
-  const maxIndex = Math.max(0, projects.length - slidesToShow);
-
-  const nextSlide = () => {
-    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
-  };
-
-  const goToSlide = (index: number) => {
-    setCurrentIndex(index);
-  };
-
-  const onTouchStart = (e: React.TouchEvent) => {
-    setTouchEnd(0); // Reset touchEnd
-    setTouchStart(e.targetTouches[0].clientX);
-  };
-
-  const onTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-  };
-
-  const onTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
-    
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > minSwipeDistance;
-    const isRightSwipe = distance < -minSwipeDistance;
-
-    if (isLeftSwipe) {
-      nextSlide();
-    }
-    if (isRightSwipe) {
-      prevSlide();
-    }
-  };
-
   return (
     <section id="projetos" className="py-20 dark:bg-slate-900/50 bg-white">
       <div className="container mx-auto px-6">
@@ -131,118 +76,108 @@ export function Projects() {
         </div>
         
         <div className="max-w-7xl mx-auto relative">
-          {/* Navigation Arrows */}
+          {/* Custom Navigation Buttons */}
           <button
-            onClick={prevSlide}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full transition-all hover:scale-110 shadow-lg -ml-6 hidden md:block"
+            onClick={() => swiperRef.current?.slidePrev()}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full transition-all hover:scale-110 shadow-lg -ml-6 hidden md:flex items-center justify-center"
             aria-label="Previous project"
           >
-            <ChevronLeft className="w-6 h-6" />
+            <ChevronLeft className="w-5 h-5" />
           </button>
 
           <button
-            onClick={nextSlide}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full transition-all hover:scale-110 shadow-lg -mr-6 hidden md:block"
+            onClick={() => swiperRef.current?.slideNext()}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full transition-all hover:scale-110 shadow-lg -mr-6 hidden md:flex items-center justify-center"
             aria-label="Next project"
           >
-            <ChevronRight className="w-6 h-6" />
+            <ChevronRight className="w-5 h-5" />
           </button>
 
-          {/* Carousel Container */}
-          <div className="overflow-hidden mx-auto" style={{ maxWidth: slidesToShow === 1 ? 'calc(100% - 3rem)' : '100%' }}>
-            <div 
-              className="flex transition-transform duration-500 ease-in-out gap-6"
-              style={{
-                transform: `translateX(-${currentIndex * 100}%)`,
-                paddingLeft: slidesToShow > 1 ? '3rem' : '0',
-                paddingRight: slidesToShow > 1 ? '3rem' : '0'
-              }}
-              onTouchStart={onTouchStart}
-              onTouchMove={onTouchMove}
-              onTouchEnd={onTouchEnd}
-            >
-              {projects.map((project, index) => (
-                <div 
-                  key={index} 
-                  className="flex-shrink-0"
-                  style={{ 
-                    width: slidesToShow === 1 
-                      ? '100%' 
-                      : `calc(${100 / slidesToShow}% - ${24 * (slidesToShow - 1) / slidesToShow}px)`
-                  }}
-                >
-                  <div className="dark:bg-slate-800/50 bg-white backdrop-blur-sm rounded-lg overflow-hidden border dark:border-slate-700/50 border-slate-200 hover:border-blue-500/50 transition-all group h-full shadow-lg hover:shadow-xl">
-                    <div className="relative overflow-hidden aspect-video">
-                      <ImageWithFallback
-                        src={project.image}
-                        alt={t(project.titleKey)}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t dark:from-slate-900 from-white/80 to-transparent opacity-60"></div>
+          <Swiper
+            onSwiper={(swiper) => (swiperRef.current = swiper)}
+            modules={[Pagination, Autoplay]}
+            spaceBetween={24}
+            slidesPerView={1}
+            loop={true}
+            loopAdditionalSlides={2}
+            pagination={{ clickable: true }}
+            autoplay={{
+              delay: 5000,
+              disableOnInteraction: false,
+            }}
+            breakpoints={{
+              640: {
+                slidesPerView: 1,
+                loop: true,
+              },
+              768: {
+                slidesPerView: 2,
+                loop: true,
+              },
+              1024: {
+                slidesPerView: 3,
+                loop: true,
+              },
+            }}
+            className="projects-swiper pb-12"
+          >
+            {projects.map((project, index) => (
+              <SwiperSlide key={index} className="h-auto">
+                <div className="dark:bg-slate-800/50 bg-white backdrop-blur-sm rounded-lg overflow-hidden border dark:border-slate-700/50 border-slate-200 hover:border-blue-500/50 transition-all group shadow-lg hover:shadow-xl h-full flex flex-col">
+                  <div className="relative overflow-hidden aspect-video flex-shrink-0">
+                    <ImageWithFallback
+                      src={project.image}
+                      alt={t(project.titleKey)}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t dark:from-slate-900 from-white/80 to-transparent opacity-60"></div>
+                  </div>
+                  
+                  <div className="p-6 flex flex-col flex-grow">
+                    <h3 className="dark:text-white text-slate-900 mb-2">
+                      {t(project.titleKey)}
+                    </h3>
+                    
+                    <p className="dark:text-slate-400 text-slate-600 mb-4 leading-relaxed flex-grow">
+                      {t(project.descKey)}
+                    </p>
+                    
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.tags.map((tag, tagIndex) => (
+                        <span 
+                          key={tagIndex}
+                          className="dark:bg-blue-500/10 bg-blue-50 dark:text-blue-300 text-blue-700 px-3 py-1 rounded-full border dark:border-blue-500/20 border-blue-200 dark:hover:bg-blue-500/20 hover:bg-blue-100 hover:scale-105 transition-all duration-200 cursor-default"
+                        >
+                          {tag}
+                        </span>
+                      ))}
                     </div>
                     
-                    <div className="p-6">
-                      <h3 className="dark:text-white text-slate-900 mb-2">
-                        {t(project.titleKey)}
-                      </h3>
-                      
-                      <p className="dark:text-slate-400 text-slate-600 mb-4 leading-relaxed">
-                        {t(project.descKey)}
-                      </p>
-                      
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {project.tags.map((tag, tagIndex) => (
-                          <span 
-                            key={tagIndex}
-                            className="dark:bg-blue-500/10 bg-blue-50 dark:text-blue-300 text-blue-700 px-3 py-1 rounded-full border dark:border-blue-500/20 border-blue-200 dark:hover:bg-blue-500/20 hover:bg-blue-100 hover:scale-105 transition-all duration-200 cursor-default"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                      
-                      <div className="flex gap-4">
-                        <a 
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2 dark:text-slate-300 text-slate-600 dark:hover:text-blue-400 hover:text-blue-600 transition-all hover:gap-3 duration-200"
-                        >
-                          <Github className="w-4 h-4" />
-                          {t('projects.code')}
-                        </a>
-                        <a 
-                          href={project.demo}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2 dark:text-slate-300 text-slate-600 dark:hover:text-blue-400 hover:text-blue-600 transition-all hover:gap-3 duration-200"
-                        >
-                          <ExternalLink className="w-4 h-4" />
-                          {t('projects.demo')}
-                        </a>
-                      </div>
+                    <div className="flex gap-4 mt-auto">
+                      <a 
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 dark:text-slate-300 text-slate-600 dark:hover:text-blue-400 hover:text-blue-600 transition-all hover:gap-3 duration-200"
+                      >
+                        <Github className="w-4 h-4" />
+                        {t('projects.code')}
+                      </a>
+                      <a 
+                        href={project.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 dark:text-slate-slate-300 text-slate-600 dark:hover:text-blue-400 hover:text-blue-600 transition-all hover:gap-3 duration-200"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                        {t('projects.demo')}
+                      </a>
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Dots Indicator */}
-          <div className="flex justify-center gap-2 mt-8">
-            {Array.from({ length: maxIndex + 1 }).map((_, index) => (
-              <button
-                key={index}
-                onClick={() => goToSlide(index)}
-                className={`w-2.5 h-2.5 rounded-full transition-all duration-200 ${
-                  currentIndex === index 
-                    ? 'bg-blue-500 dark:bg-blue-500 bg-blue-600 w-8' 
-                    : 'bg-slate-400 dark:bg-slate-600 bg-slate-300 hover:bg-blue-400 dark:hover:bg-blue-400 hover:bg-blue-500'
-                }`}
-                aria-label={`Go to slide ${index + 1}`}
-              />
+              </SwiperSlide>
             ))}
-          </div>
+          </Swiper>
         </div>
       </div>
     </section>
