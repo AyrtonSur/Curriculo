@@ -1,6 +1,7 @@
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useState, useEffect } from 'react';
+import AyrtonImg from '../assets/Ayrton.png';
 
 export function About() {
   const { t } = useLanguage();
@@ -104,7 +105,7 @@ export function About() {
             <div className="relative">
               <div className="absolute inset-0 dark:bg-blue-500/20 bg-blue-500/10 rounded-lg blur-3xl"></div>
               <ImageWithFallback
-                src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80"
+                src={AyrtonImg}
                 alt="Developer workspace"
                 className="relative rounded-lg shadow-2xl w-full h-auto"
               />
