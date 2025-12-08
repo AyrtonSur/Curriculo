@@ -34,7 +34,7 @@ export function About() {
     const shouldMakeMistake = () => {
       for (const word of mistakeWords) {
         const wordStart = fullText.indexOf(word, currentChar);
-        if (wordStart === currentChar && Math.random() > 0.7) {
+        if (wordStart === currentChar && Math.random() > 0.4) {
           return true;
         }
       }
