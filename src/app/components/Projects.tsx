@@ -8,10 +8,13 @@ const SECTION_VH = 380;
 
 const projectMeta = [
   {
-    tags: ["React", "Node.js", "PostgreSQL", "Stripe"],
-    accentColor: "#a855f7",
-    image: "https://images.unsplash.com/photo-1720962158883-b0f2021fb51e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlY29tbWVyY2UlMjBzaG9wcGluZyUyMHdlYnNpdGUlMjBkYXJrJTIwVUl8ZW58MXx8fHwxNzc3MTUyNTA1fDA&ixlib=rb-4.1.0&q=80&w=1080",
-    year: "2025",
+    tags: ["Python", "Pygame"],
+    accentColor: "#e63946",
+    image: "https://images.unsplash.com/photo-1538481143235-39a1c3e4b988?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnYW1lJTIwZGV2ZWxvcG1lbnQlMjBweXRob258ZW58MXx8fHwxNzc3MTUyNTA1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+    year: "2023",
+    url: "https://github.com/AFSFerreira/Rofnein-Project",
+    githubUrl: "https://github.com/AFSFerreira/Rofnein-Project",
+    liveUrl: "https://www2.ic.uff.br/pplay/rofnein/",
   },
   {
     tags: ["TypeScript", "D3.js", "WebSocket", "Redis"],
@@ -40,6 +43,9 @@ interface Project {
   accentColor: string;
   image: string;
   year: string;
+  url?: string;
+  githubUrl?: string;
+  liveUrl?: string;
 }
 
 export function Projects() {
@@ -290,7 +296,9 @@ function ProjectCard({
             style={{ borderColor: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)" }}
           >
             <motion.a
-              href="#"
+              href={project.url || "#"}
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-1.5 text-sm group/link"
               style={{ color: project.accentColor }}
               whileHover={{ x: 4 }}
@@ -300,7 +308,9 @@ function ProjectCard({
             </motion.a>
             <div className="flex gap-2">
               <motion.a
-                href="#"
+                href={project.githubUrl || "#"}
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.1, rotate: -5 }}
                 whileTap={{ scale: 0.9 }}
                 className={`p-1.5 rounded-lg transition-colors ${
@@ -310,7 +320,9 @@ function ProjectCard({
                 <ExternalLink className="w-4 h-4" />
               </motion.a>
               <motion.a
-                href="#"
+                href={project.liveUrl || "#"}
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 whileTap={{ scale: 0.9 }}
                 className={`p-1.5 rounded-lg transition-colors ${
@@ -427,10 +439,20 @@ function MobileProjectCard({ project, isDark }: { project: Project; isDark: bool
           {project.description}
         </p>
         <div className="flex gap-3 mt-4">
-          <a href="#" className={`p-2 rounded-lg ${isDark ? "bg-slate-700/50" : "bg-gray-100"}`}>
+          <a 
+            href={project.githubUrl || "#"} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className={`p-2 rounded-lg ${isDark ? "bg-slate-700/50" : "bg-gray-100"}`}
+          >
             <ExternalLink className={`w-4 h-4 ${isDark ? "text-gray-300" : "text-gray-600"}`} />
           </a>
-          <a href="#" className={`p-2 rounded-lg ${isDark ? "bg-slate-700/50" : "bg-gray-100"}`}>
+          <a 
+            href={project.liveUrl || "#"} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className={`p-2 rounded-lg ${isDark ? "bg-slate-700/50" : "bg-gray-100"}`}
+          >
             <ExternalLink className={`w-4 h-4 ${isDark ? "text-gray-300" : "text-gray-600"}`} />
           </a>
         </div>

@@ -106,7 +106,7 @@ const ptBR: AppTranslations = {
   projects: {
     title: "Projetos",
     items: [
-      { title: "E-commerce Platform", description: "Plataforma completa de e-commerce com painel administrativo, processamento de pagamentos e gestão de inventário." },
+      { title: "Rofnein", description: "Um jogo roguelike 2D desenvolvido em Python com Pygame. Projeto de avaliação da disciplina Laboratório de Programação de Jogos, ministrada pelo professor Esteban Walter Gonzalez Clua." },
       { title: "Dashboard Analytics", description: "Dashboard interativo para visualização de dados em tempo real com gráficos e métricas customizáveis." },
       { title: "Social Media App", description: "Aplicativo de rede social com feed personalizado, stories, mensagens e notificações em tempo real." },
       { title: "AI Chat Assistant", description: "Assistente virtual inteligente com processamento de linguagem natural e integração com múltiplas APIs." },
@@ -166,7 +166,7 @@ const enUS: AppTranslations = {
   projects: {
     title: "Projects",
     items: [
-      { title: "E-commerce Platform", description: "Complete e-commerce platform with admin panel, payment processing and inventory management." },
+      { title: "Rofnein", description: "A 2D roguelike game developed in Python with Pygame. Created as an evaluation project for the Game Programming Laboratory course, taught by professor Esteban Walter Gonzalez Clua." },
       { title: "Dashboard Analytics", description: "Interactive dashboard for real-time data visualization with customizable charts and metrics." },
       { title: "Social Media App", description: "Social networking app with personalized feed, stories, messaging and real-time notifications." },
       { title: "AI Chat Assistant", description: "Intelligent virtual assistant with natural language processing and integration with multiple APIs." },
