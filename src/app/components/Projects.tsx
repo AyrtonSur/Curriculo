@@ -1,9 +1,11 @@
 import { useRef, useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "motion/react";
-import { ExternalLink, ArrowRight } from "lucide-react";
+import { Globe, ArrowRight } from "lucide-react";
+import { IconGitHub } from "./icons/BrandIcons";
 import { useApp } from "../ctx";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import rofneinImg from "../../assets/rofnein-img1.jpg";
+import dashboardImg from "../../assets/dashboard-gp.png";
 
 const SECTION_VH = 380;
 
@@ -18,10 +20,13 @@ const projectMeta = [
     liveUrl: "https://www2.ic.uff.br/pplay/rofnein/",
   },
   {
-    tags: ["TypeScript", "D3.js", "WebSocket", "Redis"],
-    accentColor: "#3b82f6",
-    image: "https://images.unsplash.com/photo-1759752394755-1241472b589d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkYXRhJTIwYW5hbHl0aWNzJTIwZGFzaGJvYXJkJTIwaW50ZXJmYWNlfGVufDF8fHx8MTc3NzE1MjUwNXww&ixlib=rb-4.1.0&q=80&w=1080",
+    tags: ["Python", "Pandas", "Matplotlib", "Scipy", "Numpy", "Streamlit"],
+    accentColor: "#7c3aed",
+    image: dashboardImg,
     year: "2025",
+    url: "https://github.com/AyrtonSur/dashboard-gp",
+    githubUrl: "https://github.com/AyrtonSur/dashboard-gp",
+    liveUrl: "https://dashboard-gp.streamlit.app/",
   },
   {
     tags: ["React Native", "Firebase", "GraphQL", "AWS"],
@@ -312,25 +317,28 @@ function ProjectCard({
                 href={project.githubUrl || "#"}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.1, rotate: -5 }}
-                whileTap={{ scale: 0.9 }}
-                className={`p-1.5 rounded-lg transition-colors ${
-                  isDark ? "text-gray-500 hover:text-gray-300" : "text-gray-400 hover:text-gray-700"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono border transition-colors ${
+                  isDark
+                    ? "border-slate-600 text-gray-400 hover:border-slate-400 hover:text-gray-200"
+                    : "border-gray-300 text-gray-500 hover:border-gray-500 hover:text-gray-800"
                 }`}
               >
-                <ExternalLink className="w-4 h-4" />
+                <IconGitHub className="w-3.5 h-3.5" />
+                GitHub
               </motion.a>
               <motion.a
                 href={project.liveUrl || "#"}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                whileTap={{ scale: 0.9 }}
-                className={`p-1.5 rounded-lg transition-colors ${
-                  isDark ? "text-gray-500 hover:text-gray-300" : "text-gray-400 hover:text-gray-700"
-                }`}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono text-white transition-opacity hover:opacity-85"
+                style={{ background: project.accentColor }}
               >
-                <ExternalLink className="w-4 h-4" />
+                <Globe className="w-3.5 h-3.5" />
+                Live
               </motion.a>
             </div>
           </div>
@@ -439,22 +447,29 @@ function MobileProjectCard({ project, isDark }: { project: Project; isDark: bool
         <p className={`text-sm leading-relaxed ${isDark ? "text-gray-400" : "text-gray-500"}`}>
           {project.description}
         </p>
-        <div className="flex gap-3 mt-4">
-          <a 
-            href={project.githubUrl || "#"} 
-            target="_blank" 
+        <div className="flex gap-2 mt-4">
+          <a
+            href={project.githubUrl || "#"}
+            target="_blank"
             rel="noopener noreferrer"
-            className={`p-2 rounded-lg ${isDark ? "bg-slate-700/50" : "bg-gray-100"}`}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono border transition-colors ${
+              isDark
+                ? "border-slate-600 text-gray-400 hover:border-slate-400 hover:text-gray-200"
+                : "border-gray-300 text-gray-500 hover:border-gray-500 hover:text-gray-800"
+            }`}
           >
-            <ExternalLink className={`w-4 h-4 ${isDark ? "text-gray-300" : "text-gray-600"}`} />
+            <IconGitHub className="w-3.5 h-3.5" />
+            GitHub
           </a>
-          <a 
-            href={project.liveUrl || "#"} 
-            target="_blank" 
+          <a
+            href={project.liveUrl || "#"}
+            target="_blank"
             rel="noopener noreferrer"
-            className={`p-2 rounded-lg ${isDark ? "bg-slate-700/50" : "bg-gray-100"}`}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono text-white transition-opacity hover:opacity-85"
+            style={{ background: project.accentColor }}
           >
-            <ExternalLink className={`w-4 h-4 ${isDark ? "text-gray-300" : "text-gray-600"}`} />
+            <Globe className="w-3.5 h-3.5" />
+            Live
           </a>
         </div>
       </div>

@@ -107,7 +107,7 @@ const ptBR: AppTranslations = {
     title: "Projetos",
     items: [
       { title: "Rofnein", description: "Um jogo roguelike 2D desenvolvido em Python com Pygame. Projeto de avaliação da disciplina Laboratório de Programação de Jogos, ministrada pelo professor Esteban Walter Gonzalez Clua." },
-      { title: "Dashboard Analytics", description: "Dashboard interativo para visualização de dados em tempo real com gráficos e métricas customizáveis." },
+      { title: "Dashboard Streamlit", description: "Dashboard interativo desenvolvido com Streamlit para análise do processo seletivo da empresa IN Junior. O projeto teve como objetivo identificar gargalos e visualizar métricas-chave ao longo das etapas do processo, combinando análises estatísticas com visualizações dinâmicas." },
       { title: "Social Media App", description: "Aplicativo de rede social com feed personalizado, stories, mensagens e notificações em tempo real." },
       { title: "AI Chat Assistant", description: "Assistente virtual inteligente com processamento de linguagem natural e integração com múltiplas APIs." },
     ],
@@ -167,7 +167,7 @@ const enUS: AppTranslations = {
     title: "Projects",
     items: [
       { title: "Rofnein", description: "A 2D roguelike game developed in Python with Pygame. Created as an evaluation project for the Game Programming Laboratory course, taught by professor Esteban Walter Gonzalez Clua." },
-      { title: "Dashboard Analytics", description: "Interactive dashboard for real-time data visualization with customizable charts and metrics." },
+      { title: "Streamlit Dashboard", description: "Interactive dashboard built with Streamlit to analyze a recruitment process at IN Junior. The project aimed to identify bottlenecks and visualize key metrics across each stage of the process, combining statistical analysis with dynamic visualizations." },
       { title: "Social Media App", description: "Social networking app with personalized feed, stories, messaging and real-time notifications." },
       { title: "AI Chat Assistant", description: "Intelligent virtual assistant with natural language processing and integration with multiple APIs." },
     ],
