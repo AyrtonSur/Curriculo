@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "motion/react";
-import { ExternalLink, Github, ArrowRight } from "lucide-react";
+import { ExternalLink, ArrowRight } from "lucide-react";
 import { useApp } from "../ctx";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 
@@ -88,7 +88,7 @@ export function Projects() {
 
   const projects: Project[] = t.projects.items.map((item, i) => ({
     ...item,
-    ...projectMeta[i],
+    ...projectMeta[i]!,
   }));
 
   /* ── Mobile: lista vertical simples ── */
@@ -307,7 +307,7 @@ function ProjectCard({
                   isDark ? "text-gray-500 hover:text-gray-300" : "text-gray-400 hover:text-gray-700"
                 }`}
               >
-                <Github className="w-4 h-4" />
+                <ExternalLink className="w-4 h-4" />
               </motion.a>
               <motion.a
                 href="#"
@@ -428,7 +428,7 @@ function MobileProjectCard({ project, isDark }: { project: Project; isDark: bool
         </p>
         <div className="flex gap-3 mt-4">
           <a href="#" className={`p-2 rounded-lg ${isDark ? "bg-slate-700/50" : "bg-gray-100"}`}>
-            <Github className={`w-4 h-4 ${isDark ? "text-gray-300" : "text-gray-600"}`} />
+            <ExternalLink className={`w-4 h-4 ${isDark ? "text-gray-300" : "text-gray-600"}`} />
           </a>
           <a href="#" className={`p-2 rounded-lg ${isDark ? "bg-slate-700/50" : "bg-gray-100"}`}>
             <ExternalLink className={`w-4 h-4 ${isDark ? "text-gray-300" : "text-gray-600"}`} />

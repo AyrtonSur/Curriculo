@@ -6,6 +6,16 @@ import { useApp } from "../ctx";
 /* ─── Data ────────────────────────────────────────────────────── */
 const categories = [
   {
+    key: "Backend",
+    icon: Server,
+    gradient: "from-blue-600 to-cyan-500",
+    glow: "rgba(59,130,246,0.25)",
+    border: "border-blue-500/30",
+    tag: "bg-blue-500/15 text-blue-300 border-blue-500/30",
+    tagLight: "bg-blue-100 text-blue-700 border-blue-300/60",
+    skills: ["Ruby on Rails", "Node.js", "Fastify", "Prisma", "PostgreSQL", "Redis + BullMQ", "Event-Driven Arch", "REST APIs", "Go"],
+  },
+  {
     key: "Frontend",
     icon: Monitor,
     gradient: "from-purple-600 to-pink-600",
@@ -16,16 +26,6 @@ const categories = [
     skills: ["React", "TypeScript", "Next.js", "Tailwind CSS", "Vite", "HTML / CSS"],
   },
   {
-    key: "Backend",
-    icon: Server,
-    gradient: "from-blue-600 to-cyan-500",
-    glow: "rgba(59,130,246,0.25)",
-    border: "border-blue-500/30",
-    tag: "bg-blue-500/15 text-blue-300 border-blue-500/30",
-    tagLight: "bg-blue-100 text-blue-700 border-blue-300/60",
-    skills: ["Node.js", "Python", "PostgreSQL", "MongoDB", "REST APIs", "Prisma"],
-  },
-  {
     key: "DevOps & Tools",
     icon: Wrench,
     gradient: "from-emerald-500 to-teal-500",
@@ -33,7 +33,7 @@ const categories = [
     border: "border-emerald-500/30",
     tag: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30",
     tagLight: "bg-emerald-100 text-emerald-700 border-emerald-300/60",
-    skills: ["Docker", "Git", "CI/CD", "Linux", "Vercel"],
+    skills: ["Docker", "Git", "CI/CD", "Linux", "Python", "Vercel"],
   },
 ];
 

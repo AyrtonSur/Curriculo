@@ -38,6 +38,7 @@ function useTypingAnimation(
 
     const idx = phraseIndex % phrases.length;
     const current = phrases[idx];
+    if (!current) return;
 
     const schedule = (fn: () => void, delay: number) => {
       timeoutRef.current = setTimeout(fn, delay);

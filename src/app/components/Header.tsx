@@ -5,7 +5,7 @@ import { useApp } from "../ctx";
 
 const navIds = ["home", "about", "projects", "skills", "contact"] as const;
 
-const sectionIds: Record<string, string> = {
+const sectionIds: Record<typeof navIds[number], string> = {
   home: "hero",
   about: "about",
   projects: "projects",
@@ -58,9 +58,9 @@ export function Header() {
         el: document.getElementById(sectionIds[id]),
       }));
       for (let i = sections.length - 1; i >= 0; i--) {
-        const el = sections[i].el;
-        if (el && window.scrollY >= el.offsetTop - 120) {
-          setActiveSection(sections[i].id);
+        const s = sections[i];
+        if (s?.el && window.scrollY >= s.el.offsetTop - 120) {
+          setActiveSection(s.id);
           break;
         }
       }
@@ -69,7 +69,7 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = (id: string) => {
+  const scrollToSection = (id: typeof navIds[number]) => {
     document.getElementById(sectionIds[id])?.scrollIntoView({ behavior: "smooth" });
     setMobileOpen(false);
   };

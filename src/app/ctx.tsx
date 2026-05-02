@@ -59,20 +59,20 @@ export interface AppTranslations {
 const ptBR: AppTranslations = {
   nav: { home: "Início", about: "Sobre", projects: "Projetos", skills: "Habilidades", contact: "Contato" },
   hero: {
-    title: "Desenvolvedor Full Stack",
-    roles: ["Desenvolvedor Full Stack", "Engenheiro de Software", "Especialista em React", "Arquiteto de APIs"],
-    subtitle: "Transformando ideias em soluções digitais",
+    title: "Desenvolvedor Backend",
+    roles: ["Desenvolvedor Backend", "Rails Developer", "Arquiteto de APIs", "Dev Full Stack"],
+    subtitle: "Ruby on Rails, Node.js e arquitetura orientada a eventos — com domínio de React no frontend",
     viewProjects: "Ver Projetos",
     contact: "Contato",
   },
   about: {
     title: "Sobre Mim",
-    description: "Sou um desenvolvedor apaixonado por criar experiências digitais incríveis. Com experiência em diversas tecnologias, transformo ideias em produtos funcionais e elegantes.",
+    description: "Sou um desenvolvedor backend especializado em Ruby on Rails, com experiência em Node.js (Fastify + Prisma) para sistemas de mensageria com Redis e BullMQ. Já trabalhei com Python para análise de dados e tenho vivência com sistemas distribuídos e arquitetura baseada em eventos. Também tenho domínio em React e TypeScript para entregar soluções completas quando necessário.",
     features: [
       { title: "Clean Code", description: "Código limpo, organizado e seguindo as melhores práticas" },
-      { title: "Full Stack", description: "Experiência tanto em frontend quanto backend" },
-      { title: "UI/UX Design", description: "Interfaces modernas e experiências intuitivas" },
-      { title: "Performance", description: "Aplicações rápidas e otimizadas" },
+      { title: "APIs & Backend", description: "APIs RESTful com Ruby on Rails e Node.js (Fastify + Prisma), mensageria com Redis + BullMQ e sistemas distribuídos" },
+      { title: "Banco de Dados", description: "PostgreSQL, modelagem de dados, otimização de queries e cache com Redis" },
+      { title: "React & Frontend", description: "Interfaces modernas com React e TypeScript quando o projeto exige" },
     ],
   },
   projects: {
@@ -86,7 +86,7 @@ const ptBR: AppTranslations = {
     viewProject: "Ver projeto",
     moreSoon: "Em breve",
   },
-  skills: { title: "Habilidades", subtitle: "Minhas competências técnicas", categories: ["Frontend", "Backend", "DevOps & Tools"] },
+  skills: { title: "Habilidades", subtitle: "Minhas competências técnicas", categories: ["Backend", "Frontend", "DevOps & Tools"] },
   contact: {
     title: "Entre em Contato",
     subtitle: "Vamos trabalhar juntos no seu próximo projeto",
@@ -103,20 +103,20 @@ const ptBR: AppTranslations = {
 const enUS: AppTranslations = {
   nav: { home: "Home", about: "About", projects: "Projects", skills: "Skills", contact: "Contact" },
   hero: {
-    title: "Full Stack Developer",
-    roles: ["Full Stack Developer", "Software Engineer", "React Specialist", "API Architect"],
-    subtitle: "Turning ideas into digital solutions",
+    title: "Backend Developer",
+    roles: ["Backend Developer", "Rails Developer", "API Architect", "Full Stack Dev"],
+    subtitle: "Ruby on Rails, Node.js and event-driven architecture — with React expertise on the frontend",
     viewProjects: "View Projects",
     contact: "Contact",
   },
   about: {
     title: "About Me",
-    description: "I'm a developer passionate about creating incredible digital experiences. With expertise in various technologies, I turn ideas into functional and elegant products.",
+    description: "I'm a backend developer specialized in Ruby on Rails, with experience in Node.js (Fastify + Prisma) for messaging systems using Redis and BullMQ. I have worked with Python for data analysis and have a background in distributed systems and event-driven architecture. I also have strong command of React and TypeScript to deliver complete solutions when needed.",
     features: [
       { title: "Clean Code", description: "Clean, organized code following best practices" },
-      { title: "Full Stack", description: "Experience in both frontend and backend" },
-      { title: "UI/UX Design", description: "Modern interfaces and intuitive experiences" },
-      { title: "Performance", description: "Fast and optimized applications" },
+      { title: "APIs & Backend", description: "RESTful APIs with Ruby on Rails and Node.js (Fastify + Prisma), messaging with Redis + BullMQ and distributed systems" },
+      { title: "Databases", description: "PostgreSQL, data modeling, query optimization and caching with Redis" },
+      { title: "React & Frontend", description: "Modern interfaces with React and TypeScript when the project demands" },
     ],
   },
   projects: {
@@ -130,7 +130,7 @@ const enUS: AppTranslations = {
     viewProject: "View project",
     moreSoon: "More coming soon",
   },
-  skills: { title: "Skills", subtitle: "My technical competencies", categories: ["Frontend", "Backend", "DevOps & Tools"] },
+  skills: { title: "Skills", subtitle: "My technical competencies", categories: ["Backend", "Frontend", "DevOps & Tools"] },
   contact: {
     title: "Get In Touch",
     subtitle: "Let's work together on your next project",

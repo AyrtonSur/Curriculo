@@ -1,13 +1,14 @@
 import { motion } from "motion/react";
 import { useInView } from "motion/react";
 import { useRef, useState, useEffect } from "react";
-import { Mail, Linkedin, Github, Twitter, Send } from "lucide-react";
+import { Mail, Send } from "lucide-react";
+import { IconGitHub, IconLinkedIn, IconX } from "./icons/BrandIcons";
 import { useApp } from "../ctx";
 
 const socialLinks = [
-  { icon: Github, href: "https://github.com/AyrtonSur", label: "GitHub", hoverDark: "#ffffff", hoverLight: "#111827" },
-  { icon: Linkedin, href: "https://www.linkedin.com/in/ayrton-surica/", label: "LinkedIn", hoverDark: "#60a5fa", hoverLight: "#2563eb" },
-  { icon: Twitter, href: "https://x.com/AyrtonSurica", label: "Twitter / X", hoverDark: "#38bdf8", hoverLight: "#0ea5e9" },
+  { icon: IconGitHub, href: "https://github.com/AyrtonSur", label: "GitHub", hoverDark: "#ffffff", hoverLight: "#111827" },
+  { icon: IconLinkedIn, href: "https://www.linkedin.com/in/ayrton-surica/", label: "LinkedIn", hoverDark: "#60a5fa", hoverLight: "#2563eb" },
+  { icon: IconX, href: "https://x.com/AyrtonSurica", label: "Twitter / X", hoverDark: "#38bdf8", hoverLight: "#0ea5e9" },
   { icon: Mail, href: "mailto:ayrtonsurica@gmail.com", label: "Email", hoverDark: "#c084fc", hoverLight: "#9333ea" },
 ];
 

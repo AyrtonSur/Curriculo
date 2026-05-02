@@ -122,15 +122,17 @@ export function ParticleCanvas({ isDark, isMobile }: ParticleCanvasProps) {
       /* ── Constellation lines ────────────────────────────────── */
       for (let i = 0; i < stars.length; i++) {
         for (let j = i + 1; j < stars.length; j++) {
-          const dx   = stars[i].x - stars[j].x;
-          const dy   = stars[i].y - stars[j].y;
+          const si = stars[i]!;
+          const sj = stars[j]!;
+          const dx   = si.x - sj.x;
+          const dy   = si.y - sj.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
 
           if (dist < CONNECT_DIST) {
             const alpha = (1 - dist / CONNECT_DIST) * 0.22;
             ctx.beginPath();
-            ctx.moveTo(stars[i].x, stars[i].y);
-            ctx.lineTo(stars[j].x, stars[j].y);
+            ctx.moveTo(si.x, si.y);
+            ctx.lineTo(sj.x, sj.y);
             ctx.strokeStyle = dark
               ? `rgba(160,180,255,${alpha})`
               : `rgba(100,40,200,${alpha * 0.55})`;

@@ -1,10 +1,10 @@
 import { motion } from "motion/react";
 import { useInView } from "motion/react";
 import { useRef, useState, useEffect } from "react";
-import { Code2, Database, Palette, Zap } from "lucide-react";
+import { Code2, Server, Database, Monitor } from "lucide-react";
 import { useApp } from "../ctx";
 
-const featureIcons = [Code2, Database, Palette, Zap];
+const featureIcons = [Code2, Server, Database, Monitor];
 
 export function About() {
   const { isDark, t } = useApp();
@@ -58,7 +58,7 @@ export function About() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {t.about.features.map((feature, index) => {
-            const Icon = featureIcons[index];
+            const Icon = featureIcons[index] ?? Code2;
             return (
               <motion.div
                 key={feature.title}
