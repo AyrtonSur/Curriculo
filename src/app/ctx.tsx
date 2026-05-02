@@ -46,6 +46,7 @@ export interface AppTranslations {
     items: { title: string; description: string }[];
     viewProject: string;
     moreSoon: string;
+    comingSoon: string;
   };
   skills: {
     title: string;
@@ -108,11 +109,12 @@ const ptBR: AppTranslations = {
     items: [
       { title: "Rofnein", description: "Um jogo roguelike 2D desenvolvido em Python com Pygame. Projeto de avaliação da disciplina Laboratório de Programação de Jogos, ministrada pelo professor Esteban Walter Gonzalez Clua." },
       { title: "Dashboard Streamlit", description: "Dashboard interativo desenvolvido com Streamlit para análise do processo seletivo da empresa IN Junior. O projeto teve como objetivo identificar gargalos e visualizar métricas-chave ao longo das etapas do processo, combinando análises estatísticas com visualizações dinâmicas." },
-      { title: "Social Media App", description: "Aplicativo de rede social com feed personalizado, stories, mensagens e notificações em tempo real." },
-      { title: "AI Chat Assistant", description: "Assistente virtual inteligente com processamento de linguagem natural e integração com múltiplas APIs." },
+      { title: "GamIN", description: "Plataforma gamificada criada para o processo seletivo da IN Junior, onde candidatos são desafiados por um jogo que testa lógica de programação e raciocínio rápido. O objetivo é tornar a avaliação técnica mais dinâmica e envolvente." },
+      { title: "Bloco Deixa Quieto", description: "Site desenvolvido para o bloco de carnaval Deixa Quieto com o objetivo de agilizar a venda de ingressos. Utilizamos PHP com Laravel para acelerar o desenvolvimento e viabilizar a hospedagem na Hostinger, com pipeline de CI/CD via FTP e configurações de deploy com .htaccess." },
     ],
     viewProject: "Ver projeto",
     moreSoon: "Em breve",
+    comingSoon: "Em breve",
   },
   skills: { title: "Habilidades", subtitle: "Minhas competências técnicas", categories: ["Backend", "Frontend", "DevOps & Tools"] },
   contact: {
@@ -168,11 +170,12 @@ const enUS: AppTranslations = {
     items: [
       { title: "Rofnein", description: "A 2D roguelike game developed in Python with Pygame. Created as an evaluation project for the Game Programming Laboratory course, taught by professor Esteban Walter Gonzalez Clua." },
       { title: "Streamlit Dashboard", description: "Interactive dashboard built with Streamlit to analyze a recruitment process at IN Junior. The project aimed to identify bottlenecks and visualize key metrics across each stage of the process, combining statistical analysis with dynamic visualizations." },
-      { title: "Social Media App", description: "Social networking app with personalized feed, stories, messaging and real-time notifications." },
-      { title: "AI Chat Assistant", description: "Intelligent virtual assistant with natural language processing and integration with multiple APIs." },
+      { title: "GamIN", description: "Gamified platform built for the IN Junior recruitment process, where candidates are challenged by a game designed to test programming logic and quick thinking. The goal is to make technical evaluation more dynamic and engaging." },
+      { title: "Bloco Deixa Quieto", description: "Website built for the Deixa Quieto carnival block to streamline ticket sales. We used PHP with Laravel to speed up development and enable hosting on Hostinger, with a CI/CD pipeline over FTP and deployment configured via .htaccess." },
     ],
     viewProject: "View project",
     moreSoon: "More coming soon",
+    comingSoon: "Coming soon",
   },
   skills: { title: "Skills", subtitle: "My technical competencies", categories: ["Backend", "Frontend", "DevOps & Tools"] },
   contact: {

@@ -6,6 +6,8 @@ import { useApp } from "../ctx";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import rofneinImg from "../../assets/rofnein-img1.jpg";
 import dashboardImg from "../../assets/dashboard-gp.png";
+import gamINImg from "../../assets/GamIN.png";
+import blocoImg from "../../assets/blocodeixaquieto.png";
 
 const SECTION_VH = 380;
 
@@ -23,22 +25,23 @@ const projectMeta = [
     tags: ["Python", "Pandas", "Matplotlib", "Scipy", "Numpy", "Streamlit"],
     accentColor: "#7c3aed",
     image: dashboardImg,
-    year: "2025",
+    year: "2026",
     url: "https://github.com/AyrtonSur/dashboard-gp",
     githubUrl: "https://github.com/AyrtonSur/dashboard-gp",
     liveUrl: "https://dashboard-gp.streamlit.app/",
   },
   {
-    tags: ["React Native", "Firebase", "GraphQL", "AWS"],
-    accentColor: "#f97316",
-    image: "https://images.unsplash.com/photo-1710870509663-16f20f75d758?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzb2NpYWwlMjBtZWRpYSUyMG1vYmlsZSUyMGFwcCUyMGludGVyZmFjZXxlbnwxfHx8fDE3NzcxNTI1MDV8MA&ixlib=rb-4.1.0&q=80&w=1080",
-    year: "2024",
+    tags: ["Node.js", "TypeScript", "AdonisJS"],
+    accentColor: "#f59e0b",
+    image: gamINImg,
+    year: "2026",
   },
   {
-    tags: ["Python", "OpenAI", "FastAPI", "Docker"],
-    accentColor: "#22c55e",
-    image: "https://images.unsplash.com/photo-1751448582395-27fc57293f1a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcnRpZmljaWFsJTIwaW50ZWxsaWdlbmNlJTIwY2hhdCUyMHRlY2hub2xvZ3l8ZW58MXx8fHwxNzc3MTUyNTA2fDA&ixlib=rb-4.1.0&q=80&w=1080",
-    year: "2024",
+    tags: ["PHP", "Laravel", "React", "CI/CD", "Deploy", "FTP", ".htaccess"],
+    accentColor: "#3b82f6",
+    image: blocoImg,
+    year: "2025",
+    liveUrl: "https://blocodeixaquieto.com.br/",
   },
 ];
 
@@ -301,45 +304,57 @@ function ProjectCard({
             className="flex items-center justify-between mt-4 pt-4 border-t border-dashed"
             style={{ borderColor: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)" }}
           >
-            <motion.a
-              href={project.url || "#"}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-sm group/link"
-              style={{ color: project.accentColor }}
-              whileHover={{ x: 4 }}
-            >
-              {t.projects.viewProject}
-              <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-1" />
-            </motion.a>
+            {project.url ? (
+              <motion.a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-sm group/link"
+                style={{ color: project.accentColor }}
+                whileHover={{ x: 4 }}
+              >
+                {t.projects.viewProject}
+                <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-1" />
+              </motion.a>
+            ) : (
+              <span
+                className={`text-xs font-mono italic ${isDark ? "text-gray-600" : "text-gray-400"}`}
+              >
+                {t.projects.comingSoon}
+              </span>
+            )}
             <div className="flex gap-2">
-              <motion.a
-                href={project.githubUrl || "#"}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono border transition-colors ${
-                  isDark
-                    ? "border-slate-600 text-gray-400 hover:border-slate-400 hover:text-gray-200"
-                    : "border-gray-300 text-gray-500 hover:border-gray-500 hover:text-gray-800"
-                }`}
-              >
-                <IconGitHub className="w-3.5 h-3.5" />
-                GitHub
-              </motion.a>
-              <motion.a
-                href={project.liveUrl || "#"}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono text-white transition-opacity hover:opacity-85"
-                style={{ background: project.accentColor }}
-              >
-                <Globe className="w-3.5 h-3.5" />
-                Live
-              </motion.a>
+              {project.githubUrl && (
+                <motion.a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono border transition-colors ${
+                    isDark
+                      ? "border-slate-600 text-gray-400 hover:border-slate-400 hover:text-gray-200"
+                      : "border-gray-300 text-gray-500 hover:border-gray-500 hover:text-gray-800"
+                  }`}
+                >
+                  <IconGitHub className="w-3.5 h-3.5" />
+                  GitHub
+                </motion.a>
+              )}
+              {project.liveUrl && (
+                <motion.a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono text-white transition-opacity hover:opacity-85"
+                  style={{ background: project.accentColor }}
+                >
+                  <Globe className="w-3.5 h-3.5" />
+                  Live
+                </motion.a>
+              )}
             </div>
           </div>
         </div>
@@ -448,29 +463,33 @@ function MobileProjectCard({ project, isDark }: { project: Project; isDark: bool
           {project.description}
         </p>
         <div className="flex gap-2 mt-4">
-          <a
-            href={project.githubUrl || "#"}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono border transition-colors ${
-              isDark
-                ? "border-slate-600 text-gray-400 hover:border-slate-400 hover:text-gray-200"
-                : "border-gray-300 text-gray-500 hover:border-gray-500 hover:text-gray-800"
-            }`}
-          >
-            <IconGitHub className="w-3.5 h-3.5" />
-            GitHub
-          </a>
-          <a
-            href={project.liveUrl || "#"}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono text-white transition-opacity hover:opacity-85"
-            style={{ background: project.accentColor }}
-          >
-            <Globe className="w-3.5 h-3.5" />
-            Live
-          </a>
+          {project.githubUrl && (
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono border transition-colors ${
+                isDark
+                  ? "border-slate-600 text-gray-400 hover:border-slate-400 hover:text-gray-200"
+                  : "border-gray-300 text-gray-500 hover:border-gray-500 hover:text-gray-800"
+              }`}
+            >
+              <IconGitHub className="w-3.5 h-3.5" />
+              GitHub
+            </a>
+          )}
+          {project.liveUrl && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono text-white transition-opacity hover:opacity-85"
+              style={{ background: project.accentColor }}
+            >
+              <Globe className="w-3.5 h-3.5" />
+              Live
+            </a>
+          )}
         </div>
       </div>
     </div>
