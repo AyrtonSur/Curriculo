@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useMemo } from "react";
 import { motion, useMotionValue, useSpring } from "motion/react";
 import { Globe, ArrowRight } from "lucide-react";
 import { IconGitHub } from "./icons/BrandIcons";
@@ -17,7 +17,6 @@ const projectMeta = [
     accentColor: "#e63946",
     image: rofneinImg,
     year: "2023",
-    url: "https://github.com/AFSFerreira/Rofnein-Project",
     githubUrl: "https://github.com/AFSFerreira/Rofnein-Project",
     liveUrl: "https://www2.ic.uff.br/pplay/rofnein/",
   },
@@ -26,7 +25,6 @@ const projectMeta = [
     accentColor: "#7c3aed",
     image: dashboardImg,
     year: "2026",
-    url: "https://github.com/AyrtonSur/dashboard-gp",
     githubUrl: "https://github.com/AyrtonSur/dashboard-gp",
     liveUrl: "https://dashboard-gp.streamlit.app/",
   },
@@ -37,7 +35,7 @@ const projectMeta = [
     year: "2026",
   },
   {
-    tags: ["PHP", "Laravel", "React", "CI/CD", "Deploy", "FTP", ".htaccess"],
+    tags: ["PHP", "Laravel", "React", "CI/CD", "Deploy", "FTP"],
     accentColor: "#3b82f6",
     image: blocoImg,
     year: "2025",
@@ -52,7 +50,6 @@ interface Project {
   accentColor: string;
   image: string;
   year: string;
-  url?: string;
   githubUrl?: string;
   liveUrl?: string;
 }
@@ -210,6 +207,15 @@ export function Projects() {
   );
 }
 
+function pickRandom<T>(arr: T[], n: number): T[] {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j]!, copy[i]!];
+  }
+  return copy.slice(0, n);
+}
+
 /* ── Card de projeto ── */
 function ProjectCard({
   project,
@@ -221,6 +227,7 @@ function ProjectCard({
   isDark: boolean;
 }) {
   const { t } = useApp();
+  const visibleTags = useMemo(() => pickRandom(project.tags, 3), [project.tags]);
 
   return (
     <motion.div
@@ -232,14 +239,14 @@ function ProjectCard({
       whileHover={{ y: -8, transition: { duration: 0.3 } }}
     >
       <div
-        className={`relative h-[520px] rounded-2xl overflow-hidden border transition-all duration-500 ${
+        className={`relative h-[520px] rounded-2xl overflow-hidden border flex flex-col transition-all duration-500 ${
           isDark
             ? "bg-slate-900/70 backdrop-blur-md border-slate-700/40 hover:border-slate-500/60"
             : "bg-white/80 backdrop-blur-md border-gray-200/60 hover:border-gray-400/60 shadow-lg hover:shadow-2xl"
         }`}
       >
         {/* Imagem */}
-        <div className="relative h-[55%] overflow-hidden">
+        <div className="relative h-[55%] shrink-0 overflow-hidden">
           <ImageWithFallback
             src={project.image}
             alt={project.title}
@@ -268,9 +275,9 @@ function ProjectCard({
         </div>
 
         {/* Conteúdo */}
-        <div className="p-6 flex flex-col h-[45%]">
+        <div className="p-6 flex flex-col flex-1 min-h-0">
           <div className="flex flex-wrap gap-2 mb-3">
-            {project.tags.slice(0, 3).map((tag) => (
+            {visibleTags.map((tag) => (
               <span
                 key={tag}
                 className={`px-2.5 py-0.5 text-xs rounded-full font-mono ${
@@ -293,7 +300,7 @@ function ProjectCard({
           </h3>
 
           <p
-            className={`text-sm leading-relaxed flex-1 line-clamp-3 ${
+            className={`text-sm leading-relaxed flex-1 min-h-0 overflow-hidden line-clamp-3 ${
               isDark ? "text-gray-400" : "text-gray-500"
             }`}
           >
@@ -304,9 +311,9 @@ function ProjectCard({
             className="flex items-center justify-between mt-4 pt-4 border-t border-dashed"
             style={{ borderColor: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)" }}
           >
-            {project.url ? (
+            {(project.liveUrl ?? project.githubUrl) ? (
               <motion.a
-                href={project.url}
+                href={project.liveUrl ?? project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-1.5 text-sm group/link"
@@ -423,6 +430,8 @@ function SeeMoreCard({ isDark, t }: { isDark: boolean; t: any }) {
 
 /* ── Card mobile ── */
 function MobileProjectCard({ project, isDark }: { project: Project; isDark: boolean }) {
+  const visibleTags = useMemo(() => pickRandom(project.tags, 3), [project.tags]);
+
   return (
     <div
       className={`rounded-2xl overflow-hidden border transition-all ${
@@ -445,7 +454,7 @@ function MobileProjectCard({ project, isDark }: { project: Project; isDark: bool
       </div>
       <div className="p-5">
         <div className="flex flex-wrap gap-2 mb-3">
-          {project.tags.slice(0, 3).map((tag) => (
+          {visibleTags.map((tag) => (
             <span
               key={tag}
               className={`px-2.5 py-0.5 text-xs rounded-full ${
