@@ -1,6 +1,6 @@
 import { motion, useInView } from "motion/react";
 import { useRef, useState, useEffect } from "react";
-import { Monitor, Server, Wrench } from "lucide-react";
+import { Monitor, Server, Wrench, Moon, Sun, Star, Cloud } from "lucide-react";
 import { useApp } from "../ctx";
 
 /* ─── Data ────────────────────────────────────────────────────── */
@@ -23,7 +23,7 @@ const categories = [
     border: "border-purple-500/30",
     tag: "bg-purple-500/15 text-purple-300 border-purple-500/30",
     tagLight: "bg-purple-100 text-purple-700 border-purple-300/60",
-    skills: ["React", "TypeScript", "Next.js", "Tailwind CSS", "Vite", "HTML / CSS"],
+    skills: ["React", "TypeScript", "Next.js", "Vue.js", "Tailwind CSS", "Vite", "HTML / CSS"],
   },
   {
     key: "DevOps & Tools",
@@ -33,14 +33,16 @@ const categories = [
     border: "border-emerald-500/30",
     tag: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30",
     tagLight: "bg-emerald-100 text-emerald-700 border-emerald-300/60",
-    skills: ["Docker", "Git", "CI/CD", "Linux", "Python", "Vercel"],
+    skills: ["Docker", "Git", "CI/CD", "Linux", "Python", "Vercel", "FTP"],
   },
 ];
 
-/* All skills flat — for the marquee */
-const allSkills = categories.flatMap((c) => c.skills);
-const marqueeRowA = [...allSkills, ...allSkills];
-const marqueeRowB = [...[...allSkills].reverse(), ...[...allSkills].reverse()];
+/* Skills with category metadata — for colour-coded marquee */
+const skillsWithMeta = categories.flatMap((c) =>
+  c.skills.map((skill) => ({ label: skill, tag: c.tag, tagLight: c.tagLight }))
+);
+const marqueeRowA = [...skillsWithMeta, ...skillsWithMeta];
+const marqueeRowB = [...[...skillsWithMeta].reverse(), ...[...skillsWithMeta].reverse()];
 
 /* ─── Marquee Row ─────────────────────────────────────────────── */
 function MarqueeRow({
@@ -48,27 +50,25 @@ function MarqueeRow({
   reverse = false,
   isDark,
 }: {
-  items: string[];
+  items: { label: string; tag: string; tagLight: string }[];
   reverse?: boolean;
   isDark: boolean;
 }) {
   return (
-    <div className="overflow-hidden w-full">
+    <div className="overflow-x-hidden w-full py-1">
       <motion.div
         className="flex gap-3 w-max"
-        animate={{ x: reverse ? ["0%", "50%"] : ["0%", "-50%"] }}
+        animate={{ x: reverse ? ["-50%", "0%"] : ["0%", "-50%"] }}
         transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
       >
-        {items.map((skill, i) => (
+        {items.map((item, i) => (
           <span
             key={i}
-            className={`shrink-0 px-4 py-1.5 rounded-full border text-sm whitespace-nowrap select-none transition-colors ${
-              isDark
-                ? "bg-slate-800/60 border-slate-700/60 text-slate-300"
-                : "bg-white/80 border-gray-200 text-gray-600 shadow-sm"
+            className={`shrink-0 px-4 py-1.5 rounded-full border text-sm whitespace-nowrap select-none ${
+              isDark ? item.tag : item.tagLight
             }`}
           >
-            {skill}
+            {item.label}
           </span>
         ))}
       </motion.div>
@@ -133,7 +133,8 @@ function CategoryCard({
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ delay: 0.3 + index * 0.12 + i * 0.05, duration: 0.35 }}
-            className={`px-3 py-1 rounded-full border text-sm transition-all duration-200 cursor-default ${
+            whileHover={{ scale: 1.08 }}
+            className={`px-3 py-1 rounded-full border text-sm transition-all duration-200 cursor-default hover:brightness-110 ${
               isDark ? category.tag : category.tagLight
             }`}
           >
@@ -170,12 +171,64 @@ export function Skills() {
   return (
     <section
       ref={ref}
-      className={`min-h-screen py-20 transition-colors duration-500 ${
+      className={`relative overflow-hidden min-h-screen py-20 transition-colors duration-500 ${
         isDark
-          ? "bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"
-          : "bg-gradient-to-b from-slate-50 via-white to-slate-50"
+          ? "bg-gradient-to-b from-indigo-950 via-slate-900 to-slate-950"
+          : "bg-gradient-to-b from-sky-300 via-sky-100 to-white"
       }`}
     >
+      {/* Decorative celestial background */}
+      <div className="absolute inset-x-0 top-0 h-64 pointer-events-none select-none">
+
+        {/* DARK: Moon + Stars */}
+        <div className={`absolute inset-0 transition-opacity duration-700 ${isDark ? "opacity-100" : "opacity-0"}`}>
+          {/* Moon — top center */}
+          <div className="absolute top-6 left-1/2 -translate-x-1/2">
+            <div className="absolute inset-0 blur-3xl bg-indigo-400/15 scale-150 rounded-full" />
+            <Moon strokeWidth={0.4} className="relative text-slate-200" style={{ width: 180, height: 180, opacity: 0.2 }} />
+          </div>
+          {/* Stars scattered across full width */}
+          {([
+            { size: 14, top: 20,  left: "10%" },
+            { size: 9,  top: 55,  left: "18%" },
+            { size: 12, top: 12,  left: "32%" },
+            { size: 7,  top: 80,  left: "42%" },
+            { size: 10, top: 8,   left: "62%" },
+            { size: 8,  top: 60,  left: "74%" },
+            { size: 13, top: 24,  left: "85%" },
+            { size: 6,  top: 90,  left: "90%" },
+            { size: 9,  top: 44,  left: "95%" },
+          ] as const).map((s, i) => (
+            <motion.div
+              key={i}
+              className="absolute text-slate-200"
+              style={{ top: s.top, left: s.left }}
+              animate={{ scale: [1, 1.5, 1], opacity: [0.2, 0.45, 0.2] }}
+              transition={{ duration: 2 + (i % 4) * 0.5, repeat: Infinity, delay: i * 0.35, ease: "easeInOut" }}
+            >
+              <Star size={s.size} fill="currentColor" strokeWidth={0} />
+            </motion.div>
+          ))}
+        </div>
+
+        {/* LIGHT: Sun + Clouds */}
+        <div className={`absolute inset-0 transition-opacity duration-700 ${isDark ? "opacity-0" : "opacity-100"}`}>
+          {/* Sun — top center */}
+          <div className="absolute top-4 left-1/2 -translate-x-1/2">
+            <div className="absolute inset-0 blur-3xl bg-yellow-300/30 scale-150 rounded-full" />
+            <motion.div animate={{ rotate: 360 }} transition={{ duration: 60, repeat: Infinity, ease: "linear" }}>
+              <Sun strokeWidth={0.5} className="relative text-yellow-300" style={{ width: 180, height: 180, opacity: 0.55 }} />
+            </motion.div>
+          </div>
+          {/* Clouds scattered */}
+          <Cloud strokeWidth={0.6} className="absolute top-8 text-white" style={{ left: "5%",  width: 110, height: 110, opacity: 0.7 }} />
+          <Cloud strokeWidth={0.6} className="absolute top-16 text-white" style={{ left: "22%", width: 80,  height: 80,  opacity: 0.55 }} />
+          <Cloud strokeWidth={0.6} className="absolute top-6 text-white" style={{ left: "68%", width: 100, height: 100, opacity: 0.65 }} />
+          <Cloud strokeWidth={0.6} className="absolute top-20 text-white" style={{ left: "82%", width: 70,  height: 70,  opacity: 0.5 }} />
+        </div>
+
+      </div>
+
       {/* Title */}
       <div className="px-4 md:px-8 max-w-6xl mx-auto">
         <motion.div
@@ -202,7 +255,7 @@ export function Skills() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ delay: 0.2, duration: 0.8 }}
-          className="mb-16 flex flex-col gap-3 overflow-hidden"
+          className="mb-16 flex flex-col gap-3 overflow-x-hidden"
           style={{
             maskImage:
               "linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)",

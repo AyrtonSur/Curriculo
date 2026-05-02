@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState, useMemo } from "react";
-import { motion, useMotionValue, useSpring } from "motion/react";
+import { motion, useMotionValue, useSpring, AnimatePresence } from "motion/react";
 import { Globe, ArrowRight } from "lucide-react";
 import { IconGitHub } from "./icons/BrandIcons";
 import { useApp } from "../ctx";
@@ -228,25 +228,28 @@ function ProjectCard({
 }) {
   const { t } = useApp();
   const visibleTags = useMemo(() => pickRandom(project.tags, 3), [project.tags]);
+  const [tooltipVisible, setTooltipVisible] = useState(false);
 
   return (
     <motion.div
-      className="relative shrink-0 group cursor-pointer"
+      className="relative shrink-0 group cursor-pointer hover:z-10"
       style={{ width: "clamp(320px, 30vw, 460px)" }}
       initial={{ opacity: 0, y: 60 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.12, duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
       whileHover={{ y: -8, transition: { duration: 0.3 } }}
+      onMouseEnter={() => setTooltipVisible(true)}
+      onMouseLeave={() => setTooltipVisible(false)}
     >
       <div
-        className={`relative h-[520px] rounded-2xl overflow-hidden border flex flex-col transition-all duration-500 ${
+        className={`relative h-[520px] rounded-2xl border flex flex-col transition-all duration-500 ${
           isDark
             ? "bg-slate-900/70 backdrop-blur-md border-slate-700/40 hover:border-slate-500/60"
             : "bg-white/80 backdrop-blur-md border-gray-200/60 hover:border-gray-400/60 shadow-lg hover:shadow-2xl"
         }`}
       >
         {/* Imagem */}
-        <div className="relative h-[55%] shrink-0 overflow-hidden">
+        <div className="relative h-[55%] shrink-0 overflow-hidden rounded-t-2xl">
           <ImageWithFallback
             src={project.image}
             alt={project.title}
@@ -299,13 +302,36 @@ function ProjectCard({
             {project.title}
           </h3>
 
-          <p
-            className={`text-sm leading-relaxed flex-1 min-h-0 overflow-hidden line-clamp-3 ${
-              isDark ? "text-gray-400" : "text-gray-500"
-            }`}
-          >
-            {project.description}
-          </p>
+          <div className="relative flex-1 min-h-0">
+            <p
+              className={`text-sm leading-relaxed overflow-hidden line-clamp-3 ${
+                isDark ? "text-gray-400" : "text-gray-500"
+              }`}
+            >
+              {project.description}
+            </p>
+
+            <AnimatePresence>
+              {tooltipVisible && (
+                <motion.div
+                  className={`absolute top-0 left-full ml-4 w-64 p-4 rounded-2xl border z-50 pointer-events-none ${
+                    isDark
+                      ? "bg-slate-800 border-slate-600/50 shadow-2xl"
+                      : "bg-white border-gray-200 shadow-2xl"
+                  }`}
+                  style={{ borderLeftColor: project.accentColor, borderLeftWidth: 3 }}
+                  initial={{ opacity: 0, x: -6 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -6 }}
+                  transition={{ duration: 0.15 }}
+                >
+                  <p className={`text-xs leading-relaxed ${isDark ? "text-gray-300" : "text-gray-600"}`}>
+                    {project.description}
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
 
           <div
             className="flex items-center justify-between mt-4 pt-4 border-t border-dashed"
