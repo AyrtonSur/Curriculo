@@ -1,7 +1,47 @@
 import { motion, useInView } from "motion/react";
 import { useRef, useState, useEffect } from "react";
-import { Monitor, Server, Wrench, Moon, Sun, Star, Cloud } from "lucide-react";
+import { Monitor, Server, Wrench, Moon, Sun, Star, Cloud, Flower, Flower2 } from "lucide-react";
 import { useApp } from "../ctx";
+
+/* ─── City Skyline ────────────────────────────────────────────── */
+// Background layer — subtle distant silhouette, full width, no gaps
+const skylineBgPath =
+  "M0,200 V148 H120 V132 H280 V118 H440 V105 H600 V115 H760 V128 H920 V140 H1080 V148 H1200 V200 Z";
+
+// Foreground layer — 3 clusters with ground gaps between them
+const skylineFgPath =
+  "M0,200 V155 H70 V115 H125 V80 H170 V110 H235 V155 H280 V200 H370 " +
+  "V90 H425 V45 H465 V75 H520 V100 H560 V200 H630 " +
+  "V35 H675 V65 H725 V90 H765 V200 H850 " +
+  "V95 H905 V65 H950 V120 H1010 V100 H1060 V145 H1115 V130 H1160 V155 H1200 V200 Z";
+
+// Buildings data for window generation [x, width, topY]
+const skylineBuildings: [number, number, number][] = [
+  [0,   70,  155], [70,  55,  115], [125, 45,  80 ], [170, 65,  110], [235, 45,  155],
+  [370, 55,  90 ], [425, 40,  45 ], [465, 55,  75 ], [520, 40,  100],
+  [630, 45,  35 ], [675, 50,  65 ], [725, 40,  90 ],
+  [850, 55,  95 ], [905, 45,  65 ], [950, 60,  120], [1010, 50, 100], [1060, 55, 145], [1115, 45, 130], [1160, 40, 155],
+];
+
+const skylineWindows = (() => {
+  const wins: { x: number; y: number; color: string }[] = [];
+  skylineBuildings.forEach(([bx, bw, topY], bi) => {
+    const bh = 200 - topY;
+    if (bw < 18 || bh < 22) return;
+    const cols = Math.max(1, Math.floor((bw - 8) / 10));
+    const rows = Math.max(1, Math.floor((bh - 14) / 10));
+    const xPad = (bw - (cols - 1) * 10) / 2;
+    for (let ri = 0; ri < rows; ri++) {
+      for (let ci = 0; ci < cols; ci++) {
+        const hash = (bi * 13 + ci * 7 + ri * 11) % 10;
+        if (hash < 3) continue;
+        const color = hash < 5 ? "#fde68a" : hash < 7 ? "#fef9c3" : "#bae6fd";
+        wins.push({ x: bx + xPad + ci * 10, y: topY + 8 + ri * 10, color });
+      }
+    }
+  });
+  return wins;
+})();
 
 /* ─── Data ────────────────────────────────────────────────────── */
 const categories = [
@@ -173,8 +213,8 @@ export function Skills() {
       ref={ref}
       className={`relative overflow-hidden min-h-screen py-20 transition-colors duration-500 ${
         isDark
-          ? "bg-gradient-to-b from-indigo-950 via-slate-900 to-slate-950"
-          : "bg-gradient-to-b from-sky-300 via-sky-100 to-white"
+          ? "bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"
+          : "bg-gradient-to-b from-white via-sky-200 to-sky-300"
       }`}
     >
       {/* Decorative celestial background */}
@@ -282,6 +322,51 @@ export function Skills() {
             />
           ))}
         </div>
+      </div>
+
+      {/* DARK: City Skyline */}
+      <div className={`absolute bottom-0 inset-x-0 h-56 pointer-events-none select-none transition-opacity duration-700 ${isDark ? "opacity-100" : "opacity-0"}`}>
+<svg viewBox="0 0 1200 200" className="absolute bottom-0 w-full h-full" preserveAspectRatio="none">
+          {/* Background buildings — distant, barely lighter than bg */}
+          <path d={skylineBgPath} fill="#131128" />
+          {/* Foreground buildings */}
+          <path d={skylineFgPath} fill="#080612" />
+          {/* Antennas on the two landmark buildings */}
+          <line x1={445} y1={45} x2={445} y2={24} stroke="#12102a" strokeWidth={3} />
+          <line x1={445} y1={24} x2={445} y2={16} stroke="#12102a" strokeWidth={1.5} />
+          <line x1={652} y1={35} x2={652} y2={12} stroke="#12102a" strokeWidth={2.5} />
+          <line x1={652} y1={12} x2={652} y2={5} stroke="#12102a" strokeWidth={1.5} />
+          {/* Lit windows */}
+          {skylineWindows.map((w, i) => (
+            <rect key={i} x={w.x} y={w.y} width={5} height={7} rx={0.5} fill={w.color} opacity={0.88} />
+          ))}
+        </svg>
+      </div>
+
+      {/* LIGHT: Grass & Flowers */}
+      <div className={`absolute bottom-0 inset-x-0 h-56 pointer-events-none select-none transition-opacity duration-700 ${isDark ? "opacity-0" : "opacity-100"}`}>
+        <svg viewBox="0 0 1200 224" className="absolute bottom-0 w-full h-full" preserveAspectRatio="none">
+          <path d="M0,140 C200,90 400,135 600,100 C800,65 1000,118 1200,88 L1200,224 L0,224 Z" fill="#86efac" />
+          <path d="M0,165 C150,120 350,158 550,125 C750,92 950,145 1200,115 L1200,224 L0,224 Z" fill="#4ade80" />
+          <path d="M0,188 C250,155 500,182 750,158 C1000,134 1100,175 1200,155 L1200,224 L0,224 Z" fill="#22c55e" />
+        </svg>
+
+        {([
+          { left: "3%",  bottom: 52, size: 22, color: "#f472b6", Icon: Flower2 },
+          { left: "11%", bottom: 38, size: 19, color: "#facc15", Icon: Flower  },
+          { left: "21%", bottom: 60, size: 24, color: "#c084fc", Icon: Flower2 },
+          { left: "33%", bottom: 42, size: 20, color: "#f87171", Icon: Flower  },
+          { left: "46%", bottom: 66, size: 23, color: "#fb7185", Icon: Flower2 },
+          { left: "57%", bottom: 44, size: 18, color: "#fde047", Icon: Flower  },
+          { left: "67%", bottom: 58, size: 25, color: "#a78bfa", Icon: Flower2 },
+          { left: "78%", bottom: 40, size: 20, color: "#f472b6", Icon: Flower  },
+          { left: "88%", bottom: 55, size: 22, color: "#f87171", Icon: Flower2 },
+          { left: "95%", bottom: 36, size: 18, color: "#fde047", Icon: Flower  },
+        ] as const).map(({ left, bottom, size, color, Icon }, i) => (
+          <div key={i} className="absolute" style={{ left, bottom }}>
+            <Icon size={size} fill={color} stroke={color} strokeWidth={0.5} />
+          </div>
+        ))}
       </div>
     </section>
   );
