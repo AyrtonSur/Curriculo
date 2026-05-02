@@ -145,7 +145,7 @@ export function Projects() {
         }`}
       >
         {/* Título apenas no topo esquerdo */}
-        <div className="absolute top-0 left-0 right-0 z-10 flex items-center px-10 pt-8 pointer-events-none">
+        <div className="absolute top-0 left-0 right-0 z-10 flex items-center px-10 pt-16 pointer-events-none">
           <h2 className={`text-3xl md:text-4xl ${isDark ? "text-white" : "text-gray-900"}`}>
             {t.projects.title}
           </h2>
