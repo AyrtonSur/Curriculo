@@ -3,6 +3,7 @@ import { motion, useMotionValue, useSpring } from "motion/react";
 import { ExternalLink, ArrowRight } from "lucide-react";
 import { useApp } from "../ctx";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
+import rofneinImg from "../../assets/rofnein-img1.jpg";
 
 const SECTION_VH = 380;
 
@@ -10,7 +11,7 @@ const projectMeta = [
   {
     tags: ["Python", "Pygame"],
     accentColor: "#e63946",
-    image: "https://images.unsplash.com/photo-1538481143235-39a1c3e4b988?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnYW1lJTIwZGV2ZWxvcG1lbnQlMjBweXRob258ZW58MXx8fHwxNzc3MTUyNTA1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+    image: rofneinImg,
     year: "2023",
     url: "https://github.com/AFSFerreira/Rofnein-Project",
     githubUrl: "https://github.com/AFSFerreira/Rofnein-Project",

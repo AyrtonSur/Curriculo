@@ -19,7 +19,8 @@ function figmaAssetResolver() {
 export default defineConfig({
   base: '/',
   plugins: [
-    figmaAssetResolver(),
+    // Temporarily disable figmaAssetResolver to rule out asset resolution issues.
+    // figmaAssetResolver(),
     // The React and Tailwind plugins are both required for Make, even if
     // Tailwind is not being actively used – do not remove them
     react(),
