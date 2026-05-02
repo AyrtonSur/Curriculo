@@ -6,7 +6,7 @@ import { IconGitHub, IconLinkedIn, IconX } from "./icons/BrandIcons";
 import { useApp } from "../ctx";
 
 const socialLinks = [
-  { icon: IconGitHub, href: "https://github.com/AyrtonSur", label: "GitHub", hoverDark: "#ffffff", hoverLight: "#111827" },
+  { icon: IconGitHub, href: "https://github.com/AyrtonSur", label: "GitHub", hoverDark: "#f97316", hoverLight: "#ea580c" },
   { icon: IconLinkedIn, href: "https://www.linkedin.com/in/ayrton-surica/", label: "LinkedIn", hoverDark: "#60a5fa", hoverLight: "#2563eb" },
   { icon: IconX, href: "https://x.com/AyrtonSurica", label: "Twitter / X", hoverDark: "#38bdf8", hoverLight: "#0ea5e9" },
   { icon: Mail, href: "mailto:ayrtonsurica@gmail.com", label: "Email", hoverDark: "#c084fc", hoverLight: "#9333ea" },
