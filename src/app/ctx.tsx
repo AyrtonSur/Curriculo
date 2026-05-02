@@ -28,6 +28,18 @@ export interface AppTranslations {
     title: string;
     description: string;
     features: { title: string; description: string }[];
+    experience: {
+      title: string;
+      items: { company: string; role: string; period: string; url: string }[];
+    };
+    academic: {
+      title: string;
+      institution: string;
+      fullName: string;
+      course: string;
+      period: string;
+      url: string;
+    };
   };
   projects: {
     title: string;
@@ -74,6 +86,22 @@ const ptBR: AppTranslations = {
       { title: "Banco de Dados", description: "PostgreSQL, modelagem de dados, otimização de queries e cache com Redis" },
       { title: "React & Frontend", description: "Interfaces modernas com React e TypeScript quando o projeto exige" },
     ],
+    experience: {
+      title: "Experiência",
+      items: [
+        { company: "Agendor", role: "Backend Developer", period: "2025 – presente", url: "https://www.agendor.com.br/" },
+        { company: "IN Junior", role: "Backend Developer", period: "2023 – presente", url: "https://injunior.com.br" },
+        { company: "ICTI · Itaú", role: "Iniciação Científica", period: "2024 – 2025", url: "https://www.icti.org.br/" },
+      ],
+    },
+    academic: {
+      title: "Formação",
+      institution: "UFF",
+      fullName: "Universidade Federal Fluminense",
+      course: "Ciência da Computação",
+      period: "2023 – presente",
+      url: "https://www.uff.br/",
+    },
   },
   projects: {
     title: "Projetos",
@@ -118,6 +146,22 @@ const enUS: AppTranslations = {
       { title: "Databases", description: "PostgreSQL, data modeling, query optimization and caching with Redis" },
       { title: "React & Frontend", description: "Modern interfaces with React and TypeScript when the project demands" },
     ],
+    experience: {
+      title: "Experience",
+      items: [
+        { company: "Agendor", role: "Backend Developer", period: "2025 – present", url: "https://www.agendor.com.br/" },
+        { company: "IN Junior", role: "Backend Developer", period: "2023 – present", url: "https://injunior.com.br" },
+        { company: "ICTI · Itaú", role: "Scientific Initiation", period: "2024 – 2025", url: "https://www.icti.org.br/" },
+      ],
+    },
+    academic: {
+      title: "Education",
+      institution: "UFF",
+      fullName: "Universidade Federal Fluminense",
+      course: "Computer Science",
+      period: "2023 – present",
+      url: "https://www.uff.br/",
+    },
   },
   projects: {
     title: "Projects",
