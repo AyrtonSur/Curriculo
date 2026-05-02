@@ -99,7 +99,7 @@ function MarqueeRow({
       <motion.div
         className="flex gap-3 w-max"
         animate={{ x: reverse ? ["-50%", "0%"] : ["0%", "-50%"] }}
-        transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
+        transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
       >
         {items.map((item, i) => (
           <span
@@ -270,7 +270,7 @@ export function Skills() {
       </div>
 
       {/* Title */}
-      <div className="px-4 md:px-8 max-w-6xl mx-auto">
+      <div className="relative z-10 px-4 md:px-8 max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -295,7 +295,7 @@ export function Skills() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ delay: 0.2, duration: 0.8 }}
-          className="mb-16 flex flex-col gap-3 overflow-x-hidden"
+          className="relative z-10 mb-16 flex flex-col gap-3 overflow-x-hidden"
           style={{
             maskImage:
               "linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)",
@@ -309,7 +309,7 @@ export function Skills() {
       )}
 
       {/* ── Category Cards ── */}
-      <div className="px-4 md:px-8 max-w-6xl mx-auto">
+      <div className="relative z-10 px-4 md:px-8 max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {categories.map((cat, i) => (
             <CategoryCard
