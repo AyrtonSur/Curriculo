@@ -98,18 +98,18 @@ export function About() {
             <div className="flex-1 flex flex-col justify-center gap-3">
               <div>
                 <a
-                  href={t.about.academic.url}
+                  href={t.about.academic?.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`inline-flex items-center gap-1 text-lg font-bold group transition-colors ${
                     isDark ? "text-white hover:text-purple-400" : "text-gray-900 hover:text-purple-600"
                   }`}
                 >
-                  {t.about.academic.institution}
+                  {t.about.academic?.institution}
                   <ExternalLink className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </a>
                 <p className={`text-xs mt-0.5 ${isDark ? "text-gray-400" : "text-gray-500"}`}>
-                  {t.about.academic.fullName}
+                  {t.about.academic?.fullName}
                 </p>
               </div>
             </div>
@@ -136,10 +136,10 @@ export function About() {
               <Code2 className="w-6 h-6 text-white" />
             </div>
             <h4 className={`text-base font-medium mb-2 ${isDark ? "text-white" : "text-gray-900"}`}>
-              {t.about.features[0].title}
+              {t.about.features?.[0]?.title}
             </h4>
             <p className={`text-sm leading-relaxed ${isDark ? "text-gray-400" : "text-gray-500"}`}>
-              {t.about.features[0].description}
+              {t.about.features?.[0]?.description}
             </p>
           </motion.div>
 
@@ -279,10 +279,10 @@ export function About() {
               <Server className="w-6 h-6 text-white" />
             </div>
             <h4 className={`text-base font-medium mb-2 ${isDark ? "text-white" : "text-gray-900"}`}>
-              {t.about.features[1].title}
+              {t.about.features?.[1]?.title}
             </h4>
             <p className={`text-sm leading-relaxed ${isDark ? "text-gray-400" : "text-gray-500"}`}>
-              {t.about.features[1].description}
+              {t.about.features?.[1]?.description}
             </p>
           </motion.div>
 
@@ -298,10 +298,10 @@ export function About() {
               <Database className="w-6 h-6 text-white" />
             </div>
             <h4 className={`text-base font-medium mb-2 ${isDark ? "text-white" : "text-gray-900"}`}>
-              {t.about.features[2].title}
+              {t.about.features?.[2]?.title}
             </h4>
             <p className={`text-sm leading-relaxed ${isDark ? "text-gray-400" : "text-gray-500"}`}>
-              {t.about.features[2].description}
+              {t.about.features?.[2]?.description}
             </p>
           </motion.div>
 
@@ -317,10 +317,10 @@ export function About() {
               <Monitor className="w-6 h-6 text-white" />
             </div>
             <h4 className={`text-base font-medium mb-2 ${isDark ? "text-white" : "text-gray-900"}`}>
-              {t.about.features[3].title}
+              {t.about.features?.[3]?.title}
             </h4>
             <p className={`text-sm leading-relaxed ${isDark ? "text-gray-400" : "text-gray-500"}`}>
-              {t.about.features[3].description}
+              {t.about.features?.[3]?.description}
             </p>
           </motion.div>
 
