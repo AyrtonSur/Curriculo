@@ -442,9 +442,9 @@ export function Skills() {
           { left: "78%", bottom: 40, size: 20, color: "#f472b6", Icon: Flower  },
           { left: "88%", bottom: 55, size: 22, color: "#f87171", Icon: Flower2 },
           { left: "95%", bottom: 36, size: 18, color: "#fde047", Icon: Flower  },
-        ] as const).map(({ left, bottom, size, color, Icon }, i) => (
+        ] as const).filter((_, i) => !isMobile || i % 2 === 0).map(({ left, bottom, size, color, Icon }, i) => (
           <div key={i} className="absolute" style={{ left, bottom }}>
-            <Icon size={size} fill={color} stroke={color} strokeWidth={0.5} />
+            <Icon size={isMobile ? size * 0.8 : size} fill={color} stroke={color} strokeWidth={0.5} />
           </div>
         ))}
       </div>

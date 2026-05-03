@@ -69,7 +69,7 @@ export function About() {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className={`md:col-span-2 lg:col-span-3 p-7 rounded-2xl border ${card}`}
+            className={`order-1 md:order-none md:col-span-2 lg:col-span-3 p-7 rounded-2xl border ${card}`}
           >
             <p className={`text-xs uppercase tracking-widest mb-4 ${isDark ? "text-purple-400" : "text-purple-600"}`}>
               Bio
@@ -84,7 +84,7 @@ export function About() {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className={`p-6 rounded-2xl border flex flex-col justify-between ${card}`}
+            className={`order-4 md:order-none p-6 rounded-2xl border flex flex-col justify-between ${card}`}
           >
             <div className="flex items-center justify-between">
               <p className={`text-xs uppercase tracking-widest ${isDark ? "text-purple-400" : "text-purple-600"}`}>
@@ -130,7 +130,7 @@ export function About() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.2, duration: 0.6 }}
             whileHover={!isMobile ? { y: -4 } : {}}
-            className={featureCard}
+            className={`order-5 md:order-none ${featureCard}`}
           >
             <div className="w-12 h-12 bg-gradient-to-br from-purple-600 to-blue-600 rounded-xl flex items-center justify-center mb-4">
               <Code2 className="w-6 h-6 text-white" />
@@ -148,7 +148,7 @@ export function About() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="relative lg:col-span-2 lg:row-span-2 lg:min-h-[400px]"
+            className="order-2 md:order-none relative lg:col-span-2 lg:row-span-2 lg:min-h-[400px]"
             style={{ zIndex: 10, overflow: "visible" }}
           >
             <div className={`absolute inset-0 rounded-2xl border ${
@@ -158,7 +158,7 @@ export function About() {
             }`} />
 
             {/* Mobile / tablet: photo contained */}
-            <div className="relative h-64 md:h-72 lg:hidden">
+            <div className="relative h-80 md:h-96 lg:hidden">
               <img
                 src={photoUrl}
                 alt="Ayrton Surica"
@@ -176,7 +176,7 @@ export function About() {
             />
 
             <div
-              className={`absolute bottom-0 left-0 right-0 px-5 pb-5 pt-16 rounded-b-2xl ${
+              className={`absolute bottom-0 left-0 right-0 px-5 pb-5 pt-8 md:pt-12 lg:pt-16 rounded-b-2xl ${
                 isDark
                   ? "bg-gradient-to-t from-slate-900 via-slate-900/95 to-transparent"
                   : "bg-gradient-to-t from-gray-200 via-gray-200/95 to-transparent"
@@ -221,7 +221,7 @@ export function About() {
             initial={{ opacity: 0, x: 30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className={`lg:row-span-2 p-6 rounded-2xl border flex flex-col ${card}`}
+            className={`order-3 md:order-none lg:row-span-2 p-6 rounded-2xl border flex flex-col ${card}`}
           >
             <p className={`text-xs uppercase tracking-widest mb-4 shrink-0 ${isDark ? "text-purple-400" : "text-purple-600"}`}>
               {t.about.experience.title}
@@ -273,7 +273,7 @@ export function About() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.4, duration: 0.6 }}
             whileHover={!isMobile ? { y: -4 } : {}}
-            className={featureCard}
+            className={`order-6 md:order-none ${featureCard}`}
           >
             <div className="w-12 h-12 bg-gradient-to-br from-purple-600 to-blue-600 rounded-xl flex items-center justify-center mb-4">
               <Server className="w-6 h-6 text-white" />
@@ -292,7 +292,7 @@ export function About() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.5, duration: 0.6 }}
             whileHover={!isMobile ? { y: -4 } : {}}
-            className={`lg:col-span-2 ${featureCard}`}
+            className={`order-7 md:order-none lg:col-span-2 ${featureCard}`}
           >
             <div className="w-12 h-12 bg-gradient-to-br from-purple-600 to-blue-600 rounded-xl flex items-center justify-center mb-4">
               <Database className="w-6 h-6 text-white" />
@@ -311,7 +311,7 @@ export function About() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.6, duration: 0.6 }}
             whileHover={!isMobile ? { y: -4 } : {}}
-            className={`lg:col-span-2 ${featureCard}`}
+            className={`order-8 md:order-none lg:col-span-2 ${featureCard}`}
           >
             <div className="w-12 h-12 bg-gradient-to-br from-purple-600 to-blue-600 rounded-xl flex items-center justify-center mb-4">
               <Monitor className="w-6 h-6 text-white" />
