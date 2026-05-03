@@ -151,32 +151,67 @@ export function About() {
             className="order-2 md:order-none relative lg:col-span-2 lg:row-span-2 lg:min-h-[400px]"
             style={{ zIndex: 10, overflow: "visible" }}
           >
-            <div className={`absolute inset-0 rounded-2xl border ${
+
+            {/* ── Mobile / tablet: full photo + info below, no gradient ── */}
+            <div className={`lg:hidden rounded-2xl border overflow-hidden ${
+              isDark
+                ? "bg-gradient-to-b from-slate-800 to-slate-900 border-slate-700/50"
+                : "bg-gradient-to-b from-gray-100 to-gray-200 border-gray-200"
+            }`}>
+              <div className="relative h-72 sm:h-80 md:h-96">
+                <img
+                  src={photoUrl}
+                  alt="Ayrton Surica"
+                  className="w-full h-full object-contain object-bottom"
+                />
+              </div>
+              <div className={`px-5 py-4 border-t ${isDark ? "border-slate-700/50 bg-slate-900" : "border-gray-200 bg-gray-200"}`}>
+                <p className="text-purple-400 text-xs uppercase tracking-widest mb-0.5">
+                  Backend Developer
+                </p>
+                <h3 className={`text-xl font-bold mb-1.5 ${isDark ? "text-white" : "text-gray-900"}`}>
+                  Ayrton Surica
+                </h3>
+                <div className={`flex items-center gap-1.5 text-xs mb-4 ${isDark ? "text-gray-400" : "text-gray-500"}`}>
+                  <MapPin className="w-3 h-3 shrink-0" />
+                  <span>Rio de Janeiro, Brasil</span>
+                </div>
+                <div className="flex gap-2">
+                  {socialLinks.map(({ Icon, href, label }) => (
+                    <motion.a
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={label}
+                      whileTap={{ scale: 0.95 }}
+                      className={`p-2 rounded-lg border transition-colors ${
+                        isDark
+                          ? "bg-slate-800 border-slate-600/50 text-gray-300 hover:text-white hover:border-purple-500/50"
+                          : "bg-white border-gray-300 text-gray-600 hover:text-gray-900 hover:border-purple-400/60"
+                      }`}
+                    >
+                      <Icon className="w-4 h-4" />
+                    </motion.a>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* ── Desktop: photo overflows above card + gradient overlay ── */}
+            <div className={`hidden lg:block absolute inset-0 rounded-2xl border ${
               isDark
                 ? "bg-gradient-to-b from-slate-800 to-slate-900 border-slate-700/50"
                 : "bg-gradient-to-b from-gray-100 to-gray-200 border-gray-200"
             }`} />
-
-            {/* Mobile / tablet: photo contained */}
-            <div className="relative h-80 md:h-96 lg:hidden">
-              <img
-                src={photoUrl}
-                alt="Ayrton Surica"
-                className="absolute inset-0 w-full h-full object-contain object-bottom"
-                style={{ zIndex: 2 }}
-              />
-            </div>
-
-            {/* Desktop: photo overflows above card */}
             <img
               src={photoUrl}
               alt="Ayrton Surica"
               className="hidden lg:block absolute bottom-[60px] left-1/2 -translate-x-1/2 w-[98%]"
               style={{ zIndex: 2 }}
             />
-
             <div
-              className={`absolute bottom-0 left-0 right-0 px-5 pb-5 pt-8 md:pt-12 lg:pt-16 rounded-b-2xl ${
+              className={`hidden lg:block absolute bottom-0 left-0 right-0 px-5 pb-5 pt-16 rounded-b-2xl ${
                 isDark
                   ? "bg-gradient-to-t from-slate-900 via-slate-900/95 to-transparent"
                   : "bg-gradient-to-t from-gray-200 via-gray-200/95 to-transparent"
@@ -201,7 +236,7 @@ export function About() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={label}
-                    whileHover={!isMobile ? { scale: 1.1, y: -2 } : {}}
+                    whileHover={{ scale: 1.1, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                     className={`p-2 rounded-lg border transition-colors ${
                       isDark
@@ -214,6 +249,7 @@ export function About() {
                 ))}
               </div>
             </div>
+
           </motion.div>
 
           {/* ── Experiência — rows 2-3, col 4 ── */}
