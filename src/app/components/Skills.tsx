@@ -3,46 +3,6 @@ import { useRef, useState, useEffect } from "react";
 import { Monitor, Server, Wrench, Moon, Sun, Star, Cloud, Flower, Flower2 } from "lucide-react";
 import { useApp } from "../ctx";
 
-/* ─── City Skyline ────────────────────────────────────────────── */
-// Background layer — subtle distant silhouette, full width, no gaps
-const skylineBgPath =
-  "M0,200 V148 H120 V132 H280 V118 H440 V105 H600 V115 H760 V128 H920 V140 H1080 V148 H1200 V200 Z";
-
-// Foreground layer — 3 clusters with ground gaps between them
-const skylineFgPath =
-  "M0,200 V155 H70 V115 H125 V80 H170 V110 H235 V155 H280 V200 H370 " +
-  "V90 H425 V45 H465 V75 H520 V100 H560 V200 H630 " +
-  "V35 H675 V65 H725 V90 H765 V200 H850 " +
-  "V95 H905 V65 H950 V120 H1010 V100 H1060 V145 H1115 V130 H1160 V155 H1200 V200 Z";
-
-// Buildings data for window generation [x, width, topY]
-const skylineBuildings: [number, number, number][] = [
-  [0,   70,  155], [70,  55,  115], [125, 45,  80 ], [170, 65,  110], [235, 45,  155],
-  [370, 55,  90 ], [425, 40,  45 ], [465, 55,  75 ], [520, 40,  100],
-  [630, 45,  35 ], [675, 50,  65 ], [725, 40,  90 ],
-  [850, 55,  95 ], [905, 45,  65 ], [950, 60,  120], [1010, 50, 100], [1060, 55, 145], [1115, 45, 130], [1160, 40, 155],
-];
-
-const skylineWindows = (() => {
-  const wins: { x: number; y: number; color: string }[] = [];
-  skylineBuildings.forEach(([bx, bw, topY], bi) => {
-    const bh = 200 - topY;
-    if (bw < 18 || bh < 22) return;
-    const cols = Math.max(1, Math.floor((bw - 8) / 10));
-    const rows = Math.max(1, Math.floor((bh - 14) / 10));
-    const xPad = (bw - (cols - 1) * 10) / 2;
-    for (let ri = 0; ri < rows; ri++) {
-      for (let ci = 0; ci < cols; ci++) {
-        const hash = (bi * 13 + ci * 7 + ri * 11) % 10;
-        if (hash < 3) continue;
-        const color = hash < 5 ? "#fde68a" : hash < 7 ? "#fef9c3" : "#bae6fd";
-        wins.push({ x: bx + xPad + ci * 10, y: topY + 8 + ri * 10, color });
-      }
-    }
-  });
-  return wins;
-})();
-
 /* ─── Data ────────────────────────────────────────────────────── */
 const categories = [
   {
@@ -192,6 +152,140 @@ function CategoryCard({
   );
 }
 
+/* ─── Black Hole ──────────────────────────────────────────────── */
+function BlackHole({ isMobile }: { isMobile: boolean }) {
+  const canvasRef   = useRef<HTMLCanvasElement>(null);
+  const collapseRef = useRef(false);
+
+  useEffect(() => {
+    if (isMobile) return;
+
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const dpr  = Math.min(window.devicePixelRatio || 1, 2);
+    const SIZE = 560;
+    canvas.width        = SIZE * dpr;
+    canvas.height       = SIZE * dpr;
+    canvas.style.width  = `${SIZE}px`;
+    canvas.style.height = `${SIZE}px`;
+
+    const ctx = canvas.getContext("2d")!;
+    ctx.scale(dpr, dpr);
+
+    const cx = SIZE / 2;
+    const cy = SIZE / 2;
+    const maxOrbit  = 255;
+    const startTime = Date.now();
+    let   currentTime = 0;
+    let   rafId: number;
+
+    function rotate(ox: number, oy: number, x: number, y: number, angle: number): [number, number] {
+      const c = Math.cos(angle), s = Math.sin(angle);
+      return [c * (x - ox) + s * (y - oy) + ox, c * (y - oy) - s * (x - ox) + oy];
+    }
+
+    class Star {
+      orbital: number;
+      x            = cx;
+      y:           number;
+      yOrigin:     number;
+      hoverPos:    number;
+      collapseBonus: number;
+      speed:       number;
+      startRotation: number;
+      rotation     = 0;
+      color:       string;
+      prevR:       number;
+      prevX        = cx;
+      prevY:       number;
+
+      constructor() {
+        const r1 = Math.random() * (maxOrbit / 2) + 1;
+        const r2 = Math.random() * (maxOrbit / 2) + maxOrbit;
+        this.orbital       = (r1 + r2) / 2;
+        this.y             = cy + this.orbital;
+        this.yOrigin       = cy + this.orbital;
+        this.collapseBonus = Math.max(0, this.orbital - maxOrbit * 0.7);
+        this.hoverPos      = cy + maxOrbit / 2 + this.collapseBonus;
+        this.speed         = (Math.floor(Math.random() * 2.5) + 1.5) * Math.PI / 180;
+        this.startRotation = (Math.floor(Math.random() * 360) + 1) * Math.PI / 180;
+        this.color         = `rgba(255,255,255,${1 - this.orbital / 255})`;
+        this.prevR         = this.startRotation;
+        this.prevY         = this.y;
+      }
+
+      draw() {
+        this.rotation = this.startRotation + currentTime * this.speed;
+
+        if (!collapseRef.current) {
+          if (this.y > this.yOrigin)          this.y -= 2.5;
+          else if (this.y < this.yOrigin - 4) this.y += (this.yOrigin - this.y) / 10;
+        } else {
+          if (this.y > this.hoverPos)          this.y -= (this.hoverPos - this.y) / -5;
+          else if (this.y < this.hoverPos - 4) this.y += 2.5;
+        }
+
+        ctx.save();
+        ctx.strokeStyle = this.color;
+        ctx.beginPath();
+        const [ox, oy] = rotate(cx, cy, this.prevX, this.prevY, -this.prevR);
+        ctx.moveTo(ox, oy);
+        ctx.translate(cx, cy);
+        ctx.rotate(this.rotation);
+        ctx.translate(-cx, -cy);
+        ctx.lineTo(this.x, this.y);
+        ctx.stroke();
+        ctx.restore();
+
+        this.prevR = this.rotation;
+        this.prevX = this.x;
+        this.prevY = this.y;
+      }
+    }
+
+    const stars: Star[] = [];
+    for (let i = 0; i < 2500; i++) stars.push(new Star());
+
+    function loop() {
+      currentTime = (Date.now() - startTime) / 50;
+
+      ctx.globalCompositeOperation = "destination-out";
+      ctx.fillStyle = "rgba(0,0,0,0.05)";
+      ctx.fillRect(0, 0, SIZE, SIZE);
+
+      ctx.globalCompositeOperation = "source-over";
+      for (const s of stars) s.draw();
+
+      rafId = requestAnimationFrame(loop);
+    }
+
+    loop();
+    return () => cancelAnimationFrame(rafId);
+  }, [isMobile]);
+
+  if (isMobile) return null;
+
+  return (
+    <div
+      style={{
+        position: "absolute",
+        bottom: -180,
+        left: "50%",
+        transform: "translateX(-50%)",
+        width: 560,
+        height: 560,
+        cursor: "crosshair",
+        pointerEvents: "auto",
+      }}
+      onMouseEnter={() => { collapseRef.current = true; }}
+      onMouseLeave={() => { collapseRef.current = false; }}
+    >
+      <canvas ref={canvasRef} style={{ position: "absolute", inset: 0, pointerEvents: "none" }} />
+    </div>
+  );
+}
+
 /* ─── Main Component ──────────────────────────────────────────── */
 export function Skills() {
   const { isDark, t } = useApp();
@@ -324,23 +418,9 @@ export function Skills() {
         </div>
       </div>
 
-      {/* DARK: City Skyline */}
-      <div className={`absolute bottom-0 inset-x-0 h-56 pointer-events-none select-none transition-opacity duration-700 ${isDark ? "opacity-100" : "opacity-0"}`}>
-<svg viewBox="0 0 1200 200" className="absolute bottom-0 w-full h-full" preserveAspectRatio="none">
-          {/* Background buildings — distant, barely lighter than bg */}
-          <path d={skylineBgPath} fill="#131128" />
-          {/* Foreground buildings */}
-          <path d={skylineFgPath} fill="#080612" />
-          {/* Antennas on the two landmark buildings */}
-          <line x1={445} y1={45} x2={445} y2={24} stroke="#12102a" strokeWidth={3} />
-          <line x1={445} y1={24} x2={445} y2={16} stroke="#12102a" strokeWidth={1.5} />
-          <line x1={652} y1={35} x2={652} y2={12} stroke="#12102a" strokeWidth={2.5} />
-          <line x1={652} y1={12} x2={652} y2={5} stroke="#12102a" strokeWidth={1.5} />
-          {/* Lit windows */}
-          {skylineWindows.map((w, i) => (
-            <rect key={i} x={w.x} y={w.y} width={5} height={7} rx={0.5} fill={w.color} opacity={0.88} />
-          ))}
-        </svg>
+      {/* DARK: Black hole */}
+      <div className={`absolute inset-0 pointer-events-none select-none transition-opacity duration-700 ${isDark ? "opacity-100" : "opacity-0"}`}>
+        <BlackHole isMobile={isMobile} />
       </div>
 
       {/* LIGHT: Grass & Flowers */}
