@@ -4,6 +4,7 @@ import { Code2, Server, Database, Monitor, MapPin, ExternalLink, GraduationCap }
 import { useApp } from "../ctx";
 import { IconGitHub, IconLinkedIn } from "./icons/BrandIcons";
 import photoUrl from "../../assets/Ayrton.png";
+import photoMobileUrl from "../../assets/Ayrton-Mobile.png";
 
 const socialLinks = [
   { Icon: IconGitHub, href: "https://github.com/AyrtonSur", label: "GitHub" },
@@ -160,7 +161,7 @@ export function About() {
             }`}>
               <div className="relative h-72 sm:h-80 md:h-96">
                 <img
-                  src={photoUrl}
+                  src={photoMobileUrl}
                   alt="Ayrton Surica"
                   className="w-full h-full object-contain object-bottom"
                 />
